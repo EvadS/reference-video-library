@@ -87,6 +87,13 @@
                </div>
              </div>
 
+             <div *ngIf="myForm.submitted && isSuccessful" class="col-12">
+               <div class="alert alert-success">
+                 Registration is successful
+               </div>
+             </div>
+
+
               <div class="col-12">
                 <button on [disabled]="myForm.invalid" class="btn btn-primary w-100" type="submit">
                   Create Account</button>

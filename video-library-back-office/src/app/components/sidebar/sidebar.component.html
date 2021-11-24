@@ -17,7 +17,7 @@
     </li><!-- End Profile Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed"  routerLink="users">
+      <a class="nav-link collapsed" *ngIf="showAdminBoard"  routerLink="users">
         <i class="bi bi-clipboard-data"></i>
         <span>Users</span>
       </a>
