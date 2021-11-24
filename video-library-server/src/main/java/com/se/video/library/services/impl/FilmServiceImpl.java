@@ -1,15 +1,12 @@
 package com.se.video.library.services.impl;
 
 import com.se.video.library.dao.models.Country;
-import com.se.video.library.dao.models.CountryFilm;
-import com.se.video.library.dao.models.CountryFilmKey;
 import com.se.video.library.dao.models.Film;
 import com.se.video.library.dao.repository.CountryRepository;
 import com.se.video.library.dao.repository.FilmRepository;
 import com.se.video.library.dao.repository.GenreRepository;
 import com.se.video.library.errors.exception.ResourceNotFoundException;
 import com.se.video.library.mappers.FilmMapper;
-import com.se.video.library.model.repository.CountryFilmRepository;
 import com.se.video.library.payload.request.FilmRequest;
 import com.se.video.library.payload.response.FilmItemResponse;
 import com.se.video.library.payload.response.FilmResponse;
@@ -22,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,7 +35,6 @@ public class FilmServiceImpl implements FilmService {
     private final GenreRepository genreRepository;
     private final CountryRepository countryRepository;
 
-    private final CountryFilmRepository countryFilmRepository;
 
 
     @Transactional
@@ -68,19 +63,13 @@ public class FilmServiceImpl implements FilmService {
         film.setYear(request.getYear());
         film.setDuration(request.getDuration());
 
-        Set<CountryFilm> countryFilms = new HashSet<>();
         List<Country> allCountriesById = countryRepository.findAllById(request.getCountryIds());
 
         allCountriesById.stream().forEach(i->{
-            CountryFilm countryFilm = new CountryFilm();
-            countryFilm.setFilm(film);
-            countryFilm.setCountry(i);
-
-            countryFilms.add(countryFilm);
-
+            film.addChild(i);
         });
 
-        film.setCountryFilms(countryFilms);
+
         filmRepository.save(film);
 
         return FilmMapper.INSTANCE.toFilmItemResponse(film);
@@ -121,7 +110,7 @@ public class FilmServiceImpl implements FilmService {
                 .orElseThrow(() -> new ResourceNotFoundException("Film", "id", id));
 
 
-        List<CountryFilm> allByFilmId = countryFilmRepository.getAllByFilmId(id);
+//        List<CountryFilm> allByFilmId = countryFilmRepository.getAllByFilmId(id);
 
         return FilmMapper.INSTANCE.toFilmResponse(film);
     }

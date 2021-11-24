@@ -7,7 +7,9 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -40,11 +42,18 @@ public class Film extends DateAuditModel{
     @Min(1)
     private int duration;
 
-    @OneToMany(mappedBy = "film")
-    Set<CountryFilm> countryFilms = new HashSet<>();
+//    @OneToMany(mappedBy = "film")
+//    Set<CountryFilm> countryFilms = new HashSet<>();
+//
 
-    public void addChild(CountryFilm countryFilm) {
-        this.countryFilms.add(countryFilm);
-        countryFilm.setFilm(this);
+    //исполнители могут исполнять разные песни
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Country> countries = new ArrayList<>();
+
+
+    public void addChild(Country comment) {
+        countries.add(comment);
+      //  comment.setFilms(this);
     }
+
 }

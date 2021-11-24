@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -22,12 +24,12 @@ public class Country {
     @Column(nullable = false, unique=true)
     private String name;
 
-    @OneToMany(mappedBy = "country")
-    private Set<CountryFilm> countryFilms = new HashSet<>();
+//    @OneToMany(mappedBy = "country")
+//    private Set<CountryFilm> countryFilms = new HashSet<>();
 
-    public void addChild(CountryFilm countryFilm) {
-        this.countryFilms.add(countryFilm);
-        countryFilm.setCountry(this);
-    }
+
+    //разные люди исполняют разные композиции
+    @ManyToMany(mappedBy = "countries",fetch = FetchType.EAGER)
+    private List<Film> films = new ArrayList<>();
 
 }

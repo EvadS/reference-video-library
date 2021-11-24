@@ -25,6 +25,4 @@ public class Genre extends DateAuditModel {
     @Column(nullable = false, unique=true)
     private String name;
 
-    @OneToMany(mappedBy = "country")
-    private Set<CountryFilm> countryFilms;
 }
