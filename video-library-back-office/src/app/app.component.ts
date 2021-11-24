@@ -2,6 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { TokenStorageService} from "./services/token-storage.service";
 
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
   closeResult?: string;
 
   constructor(private tokenStorageService: TokenStorageService,
-              private modalService: NgbModal) { }
+              private router: Router) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -36,10 +37,8 @@ export class AppComponent implements OnInit {
 
       this.username = user.username;
     }
-  }
-
-  logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
+    else {
+      this.router.navigate(['/login']);
+    }
   }
 }
