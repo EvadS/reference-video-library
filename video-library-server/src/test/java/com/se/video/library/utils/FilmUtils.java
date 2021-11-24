@@ -14,7 +14,7 @@ public class FilmUtils {
         FilmRequest item = FilmRequest.builder()
                     .director("Director")
                     .duration(123)
-                    .genre(Genre.COMEDY.name())
+
                     .year(2020)
                     .name(name)
                 .build();

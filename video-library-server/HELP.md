@@ -61,3 +61,22 @@ local swagger links
 ```
 http://localhost:18080/custom/swagger-ui.html
 ```
+
+
+Adventure
+Comedy
+Fantasy
+Historical
+Horror
+Science
+Thriller
+Western
+
+INSERT INTO `videodb4`.`genre` (`name`) VALUES ('Action');
+INSERT INTO `videodb4`.`genre` (`name`) VALUES ('Comedy');
+INSERT INTO `videodb4`.`genre` (`name`) VALUES ('Fantasy');
+INSERT INTO `videodb4`.`genre` (`name`) VALUES ('Historical');
+INSERT INTO `videodb4`.`genre` (`name`) VALUES ('Horror');
+INSERT INTO `videodb4`.`genre` (`name`) VALUES ('Science');
+INSERT INTO `videodb4`.`genre` (`name`) VALUES ('Thriller');
+INSERT INTO `videodb4`.`genre` (`name`) VALUES ('Western');

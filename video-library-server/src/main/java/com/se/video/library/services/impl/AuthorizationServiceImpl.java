@@ -14,6 +14,7 @@ import com.se.video.library.payload.response.JwtResponse;
 import com.se.video.library.security.JwtTokenProvider;
 import com.se.video.library.security.UserPrincipal;
 import com.se.video.library.services.AuthorizationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,6 +29,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class AuthorizationServiceImpl implements AuthorizationService {
 
@@ -62,6 +64,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         String jwt = tokenProvider.generateToken(authentication);
         JwtAuthenticationResponse body = new JwtAuthenticationResponse(jwt);
 
+        log.info("");
         return body;
     }
 
@@ -88,6 +91,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
         User result = userRepository.save(user);
 
+        log.info("User created. Name:{}, role:{}", user.getName(), userRole.getName());
     }
 
     @Override

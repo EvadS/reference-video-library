@@ -1,6 +1,7 @@
 package com.se.video.library.mappers;
 
-import com.se.video.library.dao.models.FilmEntity;
+import com.se.video.library.dao.models.Film;
+import com.se.video.library.payload.enums.Genre;
 import com.se.video.library.payload.request.FilmRequest;
 import com.se.video.library.payload.response.FilmItemResponse;
 import com.se.video.library.payload.response.FilmResponse;
@@ -12,9 +13,13 @@ public interface FilmMapper {
 
     FilmMapper INSTANCE = Mappers.getMapper(FilmMapper.class);
 
-    FilmResponse toFilmResponse (FilmEntity filmEntity);
+    FilmResponse toFilmResponse (Film filmEntity);
 
-    FilmItemResponse toFilmItemResponse(FilmEntity filmEntity);
+    FilmItemResponse toFilmItemResponse(Film filmEntity);
 
-    FilmEntity toFilmEntity (FilmRequest filmEntity);
+    Film toFilmEntity (FilmRequest filmEntity);
+
+    default Genre map(int value){
+        return  Genre.COMEDY;
+    }
 }

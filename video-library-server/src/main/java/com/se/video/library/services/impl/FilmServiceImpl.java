@@ -1,6 +1,6 @@
 package com.se.video.library.services.impl;
 
-import com.se.video.library.dao.models.FilmEntity;
+import com.se.video.library.dao.models.Film;
 import com.se.video.library.dao.repository.FilmRepository;
 import com.se.video.library.errors.exception.ResourceNotFoundException;
 import com.se.video.library.mappers.FilmMapper;
@@ -29,7 +29,9 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public FilmItemResponse addFilm(FilmRequest request) {
 
-        FilmEntity filmEntity = FilmMapper.INSTANCE.toFilmEntity(request);
+
+
+        Film filmEntity = FilmMapper.INSTANCE.toFilmEntity(request);
 
         filmRepository.save(filmEntity);
 
@@ -57,7 +59,7 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public void delete(Long id) {
-        FilmEntity film = filmRepository.findById(id)
+        Film film = filmRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Film", "id", id));
 
         filmRepository.delete(film);
@@ -67,7 +69,7 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public FilmResponse getById(Long id) {
-        FilmEntity film = filmRepository.findById(id)
+        Film film = filmRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Film", "id", id));
 
         return FilmMapper.INSTANCE.toFilmResponse(film);
@@ -83,7 +85,7 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public String storeTitle(Long id, MultipartFile file) {
 
-        FilmEntity film = filmRepository.findById(id)
+        Film film = filmRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Film", "id", id));
 
         String fileName = fileStorageService.storeFile(file);

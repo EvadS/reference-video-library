@@ -24,7 +24,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("api/film")
+@RequestMapping("/film")
 @RequiredArgsConstructor
 public class FilmController {
     //401
@@ -80,9 +80,8 @@ public class FilmController {
     @PostMapping
     @ResponseBody
     public ResponseEntity<FilmItemResponse> create(
-            @Parameter(description = "file model")
+            @Parameter(description = "film model")
             @RequestBody @Valid FilmRequest request) {
-
         FilmItemResponse filmItemResponse = filmService.addFilm(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(filmItemResponse);
     }

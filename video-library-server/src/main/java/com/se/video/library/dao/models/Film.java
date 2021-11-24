@@ -6,14 +6,14 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "films")
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class FilmEntity  extends DateAuditModel{
+public class Film extends DateAuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,20 +21,19 @@ public class FilmEntity  extends DateAuditModel{
     @NotBlank
     private String name;
 
-/// название фильма
-    /*
+    @NotBlank
+    private int genre;
 
-    студия
-    жанр
-    год выпуска
-    режисер
-    в главных ролях
-    краткое описание
+    private int year;
 
-     */
+    private String director;
 
-    /**
-     * наличие в видео теке
-     * дата выдачи и дата возврата
-     */
+    private String smallDescription;
+
+    private String description;
+
+    private int duration;
+
+    @OneToMany(mappedBy = "film")
+    Set<CountryFilm> ratings;
 }

@@ -10,7 +10,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,12 +27,12 @@ public class FilmRequest {
             example = "Film", required = true)
     private String name;
 
-    @JsonProperty("genre_id")
-    @EnumValidator(
-            enumClazz = Genre.class,
-            message = "This error is coming from the enum class"
-    )
-    private String genre;
+//    @JsonProperty("genre_id")
+//    @EnumValidator(
+//            enumClazz = Genre.class,
+//            message = "This error is coming from the enum class"
+//    )
+//    private String genre;
 
     @NotNull(message = "Year cannot be null")
     @Schema(description = "Year of the film.",
@@ -47,4 +49,10 @@ public class FilmRequest {
     @Schema(description = "Duration of the film in minutes.",
             example = "121", title ="duration", required = true)
     private  Integer duration;
+
+    @NotEmpty(message = "should ne minimum one country for search")
+    private List<Integer> countryIds;
+
+    @NotEmpty(message = "should ne minimum one genre for search")
+    private List<Integer> genreIds;
 }

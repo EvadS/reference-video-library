@@ -20,7 +20,7 @@ public class AlreadyExistException extends RuntimeException{
      * @param fieldValue    an identifier of the resource which cannot be created
      */
     public AlreadyExistException(String resourceName, String fieldName, Object fieldValue) {
-        super(String.format("%s already exists with field value %s : '%s'", resourceName, fieldName, fieldValue));
+        super(String.format("%s already exists with field value %s: '%s'", resourceName, fieldName, fieldValue));
 
         this.resourceName = resourceName;
         this.fieldName = fieldName;
