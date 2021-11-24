@@ -82,7 +82,7 @@ public class FilmController {
     public ResponseEntity<FilmItemResponse> create(
             @Parameter(description = "film model")
             @RequestBody @Valid FilmRequest request) {
-        FilmItemResponse filmItemResponse = filmService.addFilm(request);
+        FilmItemResponse filmItemResponse = filmService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(filmItemResponse);
     }
 

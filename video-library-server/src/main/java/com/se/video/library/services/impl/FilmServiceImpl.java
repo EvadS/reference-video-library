@@ -1,9 +1,15 @@
 package com.se.video.library.services.impl;
 
+import com.se.video.library.dao.models.Country;
+import com.se.video.library.dao.models.CountryFilm;
+import com.se.video.library.dao.models.CountryFilmKey;
 import com.se.video.library.dao.models.Film;
+import com.se.video.library.dao.repository.CountryRepository;
 import com.se.video.library.dao.repository.FilmRepository;
+import com.se.video.library.dao.repository.GenreRepository;
 import com.se.video.library.errors.exception.ResourceNotFoundException;
 import com.se.video.library.mappers.FilmMapper;
+import com.se.video.library.model.repository.CountryFilmRepository;
 import com.se.video.library.payload.request.FilmRequest;
 import com.se.video.library.payload.response.FilmItemResponse;
 import com.se.video.library.payload.response.FilmResponse;
@@ -15,27 +21,72 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
 @Slf4j
+@Service
 @RequiredArgsConstructor
 public class FilmServiceImpl implements FilmService {
 
     private final FilmRepository filmRepository;
-    private  final FileStorageService fileStorageService;
+    private final FileStorageService fileStorageService;
 
+    private final GenreRepository genreRepository;
+    private final CountryRepository countryRepository;
+
+    private final CountryFilmRepository countryFilmRepository;
+
+
+    @Transactional
     @Override
-    public FilmItemResponse addFilm(FilmRequest request) {
+    public FilmItemResponse create(FilmRequest request) {
+        // check is genre exists
+        request.getGenreIds().stream().forEach(i -> {
+            if (!genreRepository.existsById(i)) {
+                throw new ResourceNotFoundException("Genre", "id", i);
+            }
+        });
+
+        // check is country exists
+        request.getCountryIds().stream().forEach(i -> {
+            if (!countryRepository.existsById(i)) {
+                throw new ResourceNotFoundException("Country", "id", i);
+            }
+        });
+
+        Film film = new Film();
+        film.setName(request.getName());
+        film.setDescription(request.getDescription());
+        film.setSmallDescription(request.getSmallDescription());
+
+        film.setDirector(request.getDirector());
+        film.setYear(request.getYear());
+        film.setDuration(request.getDuration());
+
+        Set<CountryFilm> countryFilms = new HashSet<>();
+        List<Country> allCountriesById = countryRepository.findAllById(request.getCountryIds());
+
+        allCountriesById.stream().forEach(i->{
+            CountryFilm countryFilm = new CountryFilm();
+            countryFilm.setFilm(film);
+            countryFilm.setCountry(i);
+
+         //   countryFilms.add(countryFilm);
+
+            film.addChild(countryFilm);
+        });
+
+        //film.setCountryFilms(countryFilms);
+        filmRepository.save(film);
 
 
 
-        Film filmEntity = FilmMapper.INSTANCE.toFilmEntity(request);
-
-        filmRepository.save(filmEntity);
-
-        return FilmMapper.INSTANCE.toFilmItemResponse(filmEntity);
+        return FilmMapper.INSTANCE.toFilmItemResponse(film);
     }
 
     // Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
@@ -71,6 +122,9 @@ public class FilmServiceImpl implements FilmService {
     public FilmResponse getById(Long id) {
         Film film = filmRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Film", "id", id));
+
+
+        List<CountryFilm> allByFilmId = countryFilmRepository.getAllByFilmId(id);
 
         return FilmMapper.INSTANCE.toFilmResponse(film);
     }

@@ -1,6 +1,8 @@
 package com.se.video.library.payload.response;
 
 import com.se.video.library.payload.enums.Genre;
+import com.se.video.library.payload.request.CountryItemResponse;
+import com.se.video.library.payload.request.GenreItemResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @Data
@@ -40,4 +43,8 @@ public class FilmItemResponse {
     private Integer duration;
 
     private boolean isPublished =false;
+
+    private List<CountryItemResponse> countries;
+
+    private List<GenreItemResponse>genres;
 }

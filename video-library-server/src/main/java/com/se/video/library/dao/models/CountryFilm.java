@@ -1,7 +1,10 @@
 package com.se.video.library.dao.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 public class CountryFilm {
 

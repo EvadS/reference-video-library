@@ -51,8 +51,12 @@ public class FilmRequest {
     private  Integer duration;
 
     @NotEmpty(message = "should ne minimum one country for search")
-    private List<Integer> countryIds;
+    private List<Long> countryIds;
 
     @NotEmpty(message = "should ne minimum one genre for search")
-    private List<Integer> genreIds;
+    private List<Long> genreIds;
+
+    private String description;
+
+    private String smallDescription;
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -23,5 +24,11 @@ public class Country {
     private String name;
 
     @OneToMany(mappedBy = "film")
-    private Set<CountryFilm> countryFilms;
+    private Set<CountryFilm> countryFilms = new HashSet<>();
+
+    public void addChild(CountryFilm countryFilm) {
+        this.countryFilms.add(countryFilm);
+        countryFilm.setCountry(this);
+    }
+
 }

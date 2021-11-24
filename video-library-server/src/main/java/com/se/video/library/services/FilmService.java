@@ -15,7 +15,7 @@ public interface FilmService {
      * @param request provide information about new film
      * @return provide information about created film
      */
-    FilmItemResponse addFilm(FilmRequest request);
+    FilmItemResponse create(FilmRequest request);
 
     PagedResponse<FilmItemResponse> getAllPaged(int page, int size);
 
