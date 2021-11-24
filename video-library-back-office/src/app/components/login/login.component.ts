@@ -47,14 +47,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-
-    console.log(form.value.email);
-
     this.authService.login(form.value.email,
        form.value.password).subscribe(
       data => {
 
-        console.log("--> response: " + data);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
 
@@ -72,14 +68,5 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       }
     );
-
    }
-
-   displayError( error? :String) {
-
-
-    // thisForm.querySelector('.loading').classList.remove('d-block');
-    // thisForm.querySelector('.error-message').innerHTML = error;
-    // thisForm.querySelector('.error-message').classList.add('d-block');
-  }
 }

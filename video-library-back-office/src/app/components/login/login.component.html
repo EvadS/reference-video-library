@@ -24,7 +24,7 @@
                   novalidate>
 
               <div class="col-12">
-                <label class="form-label" for="email">Username</label>
+                <label class="form-label" for="email">Email</label>
                 <div class="input-group has-validation">
                   <span class="input-group-text" id="inputGroupPrepend">@</span>
                   <input
@@ -54,7 +54,7 @@
               </div>
 
               <div *ngIf="myForm.submitted && isLoginFailed" class="col-12">
-                <div class="invalid-feedback">
+                <div class="invalid-visible">
                   Login failed: {{ errorMessage }}
                 </div>
               </div>
