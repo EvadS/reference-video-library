@@ -27,32 +27,3 @@
   <router-outlet></router-outlet>
 </div>
 
-
-<button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button>
-
-<ng-template #mymodal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title"
-        id="modal-basic-title"
-        ngDefaultControl
-    >{{"modalTitle"}}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    This is example from ItSolutionStuff.com
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control"
-             id="exampleInputEmail1" aria-describedby="emailHelp"
-             placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-
-  </div>
-  <div class="modal-footer">
-
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
-  </div>
-</ng-template>

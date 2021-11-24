@@ -12,7 +12,6 @@ import {HomeComponent} from './components/home/home.component';
 
 import {LogService} from "./services/log.service";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 import {AuthInterceptor} from "./helpers/auth.interceptor";
 
 const routes: Routes = [
@@ -27,7 +26,7 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
 
   ],
   imports: [
