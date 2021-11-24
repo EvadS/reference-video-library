@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Film",
+    "director": "Robert Weide",
+    "duration": 120,
+    "published": false
+  },
+  {
+    "id": 2,
+    "name": "Film2",
+    "director": "Robert Weide",
+    "duration": 135,
+    "published": true
+  },
+  {
+    "id": 3,
+    "name": "Film 3",
+    "director": "Robert Weide",
+    "duration": 120,
+    "published": false
+  }
+]
