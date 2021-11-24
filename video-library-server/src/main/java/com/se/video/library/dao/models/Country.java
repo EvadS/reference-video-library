@@ -1,15 +1,14 @@
 package com.se.video.library.dao.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "country")
 @AllArgsConstructor
@@ -23,7 +22,7 @@ public class Country {
     @Column(nullable = false, unique=true)
     private String name;
 
-    @OneToMany(mappedBy = "film")
+    @OneToMany(mappedBy = "country")
     private Set<CountryFilm> countryFilms = new HashSet<>();
 
     public void addChild(CountryFilm countryFilm) {

@@ -76,15 +76,12 @@ public class FilmServiceImpl implements FilmService {
             countryFilm.setFilm(film);
             countryFilm.setCountry(i);
 
-         //   countryFilms.add(countryFilm);
+            countryFilms.add(countryFilm);
 
-            film.addChild(countryFilm);
         });
 
-        //film.setCountryFilms(countryFilms);
+        film.setCountryFilms(countryFilms);
         filmRepository.save(film);
-
-
 
         return FilmMapper.INSTANCE.toFilmItemResponse(film);
     }
