@@ -33,13 +33,16 @@
                     email
                     id="email"
                     name="email"
-                    required type="email"/>
+                    required type="email"
+                    minlength="3"
+                    maxlength="20"/>
 
                 </div>
                 <div div [hidden]="email.valid || email.untouched"
                      class="invalid-visible">
                   Please enter your email
                 </div>
+
               </div>
 
               <div class="col-12">

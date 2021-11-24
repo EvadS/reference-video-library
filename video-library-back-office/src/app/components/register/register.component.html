@@ -19,18 +19,26 @@
               <p class="text-center small">Enter your personal details to create account</p>
             </div>
 
-           <form class="row g-3 needs-validation" novalidate
+           <form class="row g-3 needs-validation" novalidate    name="form"
                     #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" >
 
               <div class="col-12">
                 <label for="yourName" class="form-label">Your Name</label>
                 <input type="text" name="username" class="form-control"
-                       id="yourName" required
+                       id="yourName" required   minlength="4" maxlength="20"
                        #username="ngModel" [(ngModel)]="registerRequest.username"
                 >
-                <div div [hidden]="username.valid || username.untouched"
-                     class="invalid-visible">
-                 * Please, enter your name!
+
+                <div *ngIf="username.errors?.['required']"  class="invalid-visible">
+                  Please, enter your name!
+                </div>
+
+                <div *ngIf="username.errors?.['minlength']"  class="invalid-visible">
+                  Name must be at least 4 characters long.
+                </div>
+
+                <div *ngIf="username.errors?.['maxlength']"  class="invalid-visible">
+                  Username must be at most 20 characters
                 </div>
               </div>
 
@@ -47,6 +55,9 @@
                   <div div [hidden]="email.valid || email.untouched" class="invalid-visible">
                     * Please enter your email.
                   </div>
+
+
+
 
               </div>
 
