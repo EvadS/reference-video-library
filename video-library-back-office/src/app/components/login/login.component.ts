@@ -65,7 +65,10 @@ export class LoginComponent implements OnInit {
       },
       err => {
         this.errorMessage = err.error.message;
-
+        console.log("here----------------")
+        if(err.error.status== 401){
+          this.errorMessage = "invalid user name or password"
+        }
         this.isLoginFailed = true;
       }
     );
