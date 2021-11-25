@@ -2,7 +2,7 @@ package com.se.video.library.controllers;
 
 
 import com.se.video.library.errors.models.ErrorDetail;
-import com.se.video.library.payload.request.FilmListRequest;
+import com.se.video.library.payload.request.FilmSearchRequest;
 import com.se.video.library.payload.request.FilmRequest;
 import com.se.video.library.payload.response.FilmItemResponse;
 import com.se.video.library.payload.response.FilmResponse;
@@ -106,11 +106,15 @@ public class FilmController {
         return new ResponseEntity(id, HttpStatus.ACCEPTED);
     }
 
+    //?sort=column1,direction1&sort=column2,direction2
+    //sort=duration,asc&name,desc
     @PostMapping("/search")
     @ResponseBody
-    public Page<FilmResponse> getAll(@RequestBody @Valid FilmListRequest request) {
+    public Page<FilmResponse> getAll(
+            @RequestParam(defaultValue = "id,desc") String[] sort,
+            @RequestBody @Valid FilmSearchRequest request) {
 
-        Page<FilmResponse> filmResponses = filmService.getPaged(request);
+        Page<FilmResponse> filmResponses = filmService.getPaged(request,sort);
 
         return filmResponses;
     }

@@ -1,5 +1,6 @@
 package com.se.video.library.services.impl;
 
+import com.se.video.library.errors.exception.AlreadyExistException;
 import com.se.video.library.errors.exception.ResourceNotFoundException;
 import com.se.video.library.mappers.FilmMapper;
 import com.se.video.library.model.Country;
@@ -9,8 +10,8 @@ import com.se.video.library.model.repository.CountryRepository;
 import com.se.video.library.model.repository.FilmRepository;
 import com.se.video.library.model.repository.GenreRepository;
 import com.se.video.library.model.specification.FilmSpecification;
-import com.se.video.library.payload.request.FilmListRequest;
 import com.se.video.library.payload.request.FilmRequest;
+import com.se.video.library.payload.request.FilmSearchRequest;
 import com.se.video.library.payload.response.FilmItemResponse;
 import com.se.video.library.payload.response.FilmResponse;
 import com.se.video.library.payload.response.PagedResponse;
@@ -23,12 +24,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -41,13 +45,18 @@ public class FilmServiceImpl implements FilmService {
 
     private final GenreRepository genreRepository;
     private final CountryRepository countryRepository;
-
+    @Autowired
+    FilmSpecification filmSpecification;
 
     @Transactional
     @Override
     public FilmItemResponse create(FilmRequest request) {
 
-        //TODO: check name is exists
+        Optional<Film> byName = filmRepository.findByName(request.getName());
+        if (byName.isPresent()) {
+            throw new AlreadyExistException("Film", "name", request.getName());
+        }
+
         // check is genre exists
         request.getGenreIds().stream().forEach(i -> {
             if (!genreRepository.existsById(i)) {
@@ -94,6 +103,11 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public FilmItemResponse update(Long id, FilmRequest request) {
+
+        Optional<Film> byNameAndIdNot = filmRepository.findByNameAndIdNot(request.getName(), id);
+        if(byNameAndIdNot.isPresent()){
+            throw new AlreadyExistException("Film", "name", request.getName());
+        }
 
         return filmRepository.findById(id)
                 .map(flm -> {
@@ -171,21 +185,41 @@ public class FilmServiceImpl implements FilmService {
         return fileName;
     }
 
-
-    @Autowired
-    FilmSpecification filmSpecification;
-
     @Override
-    public Page<FilmResponse>  getPaged(FilmListRequest request) {
+    public Page<FilmResponse> getPaged(FilmSearchRequest request, String[] sort) {
+        List<Order> orders = new ArrayList<Order>();
 
-        Pageable pageable = PageRequest.of(request.getPageNumber(), request.getPageSize(),
-                Sort.by("id"));
+        if (sort[0].contains(",")) {
+            // will sort more than 2 fields
+            // sortOrder="field, direction"
+            for (String sortOrder : sort) {
+                String[] _sort = sortOrder.split(",");
+                orders.add(new Order(getSortDirection(_sort[1]), _sort[0]));
+            }
+        } else {
+            // sort=[field, direction]
+            orders.add(new Order(getSortDirection(sort[1]), sort[0]));
+        }
 
-        filmSpecification.getFilter(request);
+        Pageable pageable = PageRequest.of(request.getPageNumber()
+                , request.getPageSize(),
+                Sort.by(orders));
 
-        Page<FilmResponse> pagedFilmResponse = filmRepository.findAll(filmSpecification.getFilter(request), pageable)
+
+        Page<FilmResponse> pagedFilmResponse = filmRepository.findAll(filmSpecification.getFilter(request),
+                pageable)
                 .map(FilmMapper.INSTANCE::toFilmResponse);
 
         return pagedFilmResponse;
+    }
+
+    private Sort.Direction getSortDirection(String direction) {
+        if (direction.equals("asc")) {
+            return Sort.Direction.ASC;
+        } else if (direction.equals("desc")) {
+            return Sort.Direction.DESC;
+        }
+
+        return Sort.Direction.ASC;
     }
 }

@@ -1,7 +1,7 @@
 package com.se.video.library.model.specification;
 
 import com.se.video.library.model.Film;
-import com.se.video.library.payload.request.FilmListRequest;
+import com.se.video.library.payload.request.FilmSearchRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
@@ -9,13 +9,13 @@ import static org.springframework.data.jpa.domain.Specification.where;
 
 
 @Component
-public class FilmSpecification extends BaseSpecification<Film, FilmListRequest> {
+public class FilmSpecification extends BaseSpecification<Film, FilmSearchRequest> {
 
 
     public static final String YEAR_COLUMN = "year";
 
     @Override
-    public Specification<Film> getFilter(FilmListRequest request) {
+    public Specification<Film> getFilter(FilmSearchRequest request) {
         return (root, query, cb) -> {
             query.distinct(true);
             return where(
