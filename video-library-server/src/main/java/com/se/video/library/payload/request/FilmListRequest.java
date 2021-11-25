@@ -7,10 +7,12 @@ import java.util.List;
 @Data
 public class FilmListRequest {
 
-    private  String name;
+    private String name;
     private String director;
     private Integer yearStart;
     private Integer yearEnd;
-    private List<Integer> genreIds;
-    private List<Integer> countryIds;
+
+    private Integer  pageSize;
+    private Integer  pageNumber;
+
 }

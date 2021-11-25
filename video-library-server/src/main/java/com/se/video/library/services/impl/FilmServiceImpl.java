@@ -8,6 +8,8 @@ import com.se.video.library.model.Genre;
 import com.se.video.library.model.repository.CountryRepository;
 import com.se.video.library.model.repository.FilmRepository;
 import com.se.video.library.model.repository.GenreRepository;
+import com.se.video.library.model.specification.FilmSpecification;
+import com.se.video.library.payload.request.FilmListRequest;
 import com.se.video.library.payload.request.FilmRequest;
 import com.se.video.library.payload.response.FilmItemResponse;
 import com.se.video.library.payload.response.FilmResponse;
@@ -16,6 +18,7 @@ import com.se.video.library.services.FileStorageService;
 import com.se.video.library.services.FilmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -168,21 +171,21 @@ public class FilmServiceImpl implements FilmService {
         return fileName;
     }
 
+
+    @Autowired
+    FilmSpecification filmSpecification;
+
     @Override
-    public Page<FilmResponse>  getPaged(String orderBy, String direction, int page, int size) {
+    public Page<FilmResponse>  getPaged(FilmListRequest request) {
 
-        Sort sort = null;
-        if (direction.equals("asc")) {
-            sort = Sort.by(Sort.Direction.ASC, orderBy);
-        }
-        if (direction.equals("desc")) {
-            sort = Sort.by(Sort.Direction.ASC, orderBy);
-        }
-        Pageable pageable = PageRequest.of(page, size, sort);
-        Page<Film> all = filmRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(request.getPageNumber(), request.getPageSize(),
+                Sort.by("id"));
 
-        return
-      filmRepository.findAll(pageable).map(FilmMapper.INSTANCE::toFilmResponse);
+        filmSpecification.getFilter(request);
 
+        Page<FilmResponse> pagedFilmResponse = filmRepository.findAll(filmSpecification.getFilter(request), pageable)
+                .map(FilmMapper.INSTANCE::toFilmResponse);
+
+        return pagedFilmResponse;
     }
 }

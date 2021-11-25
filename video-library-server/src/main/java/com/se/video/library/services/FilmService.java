@@ -1,5 +1,6 @@
 package com.se.video.library.services;
 
+import com.se.video.library.payload.request.FilmListRequest;
 import com.se.video.library.payload.request.FilmRequest;
 import com.se.video.library.payload.response.FilmItemResponse;
 import com.se.video.library.payload.response.FilmResponse;
@@ -30,5 +31,5 @@ public interface FilmService {
 
     String storeTitle(Long id, MultipartFile file);
 
-    Page<FilmResponse> getPaged(String orderBy, String direction, int page, int size);
+    Page<FilmResponse> getPaged(FilmListRequest request);
 }
