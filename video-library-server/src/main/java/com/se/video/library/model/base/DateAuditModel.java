@@ -1,4 +1,4 @@
-package com.se.video.library.dao.models.base;
+package com.se.video.library.model.base;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

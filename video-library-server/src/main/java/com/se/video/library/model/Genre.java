@@ -1,6 +1,6 @@
-package com.se.video.library.dao.models;
+package com.se.video.library.model;
 
-import com.se.video.library.dao.models.base.DateAuditModel;
+import com.se.video.library.model.base.DateAuditModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Set;
 
 @Data
 @Entity

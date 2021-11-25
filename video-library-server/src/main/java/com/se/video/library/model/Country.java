@@ -1,13 +1,11 @@
-package com.se.video.library.dao.models;
+package com.se.video.library.model;
 
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter

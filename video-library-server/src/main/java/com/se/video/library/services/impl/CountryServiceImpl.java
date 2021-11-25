@@ -1,7 +1,7 @@
 package com.se.video.library.services.impl;
 
-import com.se.video.library.dao.models.Country;
-import com.se.video.library.dao.repository.CountryRepository;
+import com.se.video.library.model.Country;
+import com.se.video.library.model.repository.CountryRepository;
 import com.se.video.library.errors.exception.AlreadyExistException;
 import com.se.video.library.mappers.CountryMapper;
 import com.se.video.library.payload.request.CountryItemResponse;

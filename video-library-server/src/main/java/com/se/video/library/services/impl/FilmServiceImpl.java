@@ -1,10 +1,10 @@
 package com.se.video.library.services.impl;
 
-import com.se.video.library.dao.models.Country;
-import com.se.video.library.dao.models.Film;
-import com.se.video.library.dao.repository.CountryRepository;
-import com.se.video.library.dao.repository.FilmRepository;
-import com.se.video.library.dao.repository.GenreRepository;
+import com.se.video.library.model.Country;
+import com.se.video.library.model.Film;
+import com.se.video.library.model.repository.CountryRepository;
+import com.se.video.library.model.repository.FilmRepository;
+import com.se.video.library.model.repository.GenreRepository;
 import com.se.video.library.errors.exception.ResourceNotFoundException;
 import com.se.video.library.mappers.FilmMapper;
 import com.se.video.library.payload.request.FilmRequest;
@@ -19,9 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j

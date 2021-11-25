@@ -1,10 +1,8 @@
 package com.se.video.library.services.impl;
 
-import com.se.video.library.dao.models.Country;
-import com.se.video.library.dao.models.Genre;
-import com.se.video.library.dao.repository.GenreRepository;
+import com.se.video.library.model.Genre;
+import com.se.video.library.model.repository.GenreRepository;
 import com.se.video.library.errors.exception.AlreadyExistException;
-import com.se.video.library.mappers.CountryMapper;
 import com.se.video.library.mappers.GenreMapper;
 import com.se.video.library.payload.request.GenreItemResponse;
 import com.se.video.library.payload.request.GenreRequest;
@@ -12,7 +10,6 @@ import com.se.video.library.payload.response.GenreResponse;
 import com.se.video.library.services.GenreService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

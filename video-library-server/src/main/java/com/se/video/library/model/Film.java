@@ -1,16 +1,14 @@
-package com.se.video.library.dao.models;
+package com.se.video.library.model;
 
 
-import com.se.video.library.dao.models.base.DateAuditModel;
+import com.se.video.library.model.base.DateAuditModel;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Getter

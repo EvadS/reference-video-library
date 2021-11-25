@@ -1,7 +1,6 @@
-package com.se.video.library.dao.repository;
+package com.se.video.library.model.repository;
 
-import com.se.video.library.dao.models.Country;
-import com.se.video.library.dao.models.Genre;
+import com.se.video.library.model.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
