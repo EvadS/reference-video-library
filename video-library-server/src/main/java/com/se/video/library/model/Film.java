@@ -1,8 +1,9 @@
 package com.se.video.library.model;
 
 
-import com.se.video.library.model.base.DateAuditModel;
+
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -21,7 +22,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Film extends DateAuditModel{
+public class Film  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

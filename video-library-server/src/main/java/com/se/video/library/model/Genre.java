@@ -1,6 +1,6 @@
 package com.se.video.library.model;
 
-import com.se.video.library.model.base.DateAuditModel;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +17,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Genre extends DateAuditModel {
+public class Genre  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

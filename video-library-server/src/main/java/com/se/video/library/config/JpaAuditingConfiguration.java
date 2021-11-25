@@ -18,6 +18,11 @@ import javax.annotation.PostConstruct;
 import java.util.Optional;
 
 @EnableJpaAuditing
+
+//@Configuration
+//@EnableTransactionManagement
+//@EnableJpaRepositories
+//@EnableJpaAuditing
 public class JpaAuditingConfiguration {
     @Bean
     public AuditorAware<Long> auditorProvider() {

@@ -1,6 +1,6 @@
 package com.se.video.library.model;
 
-import com.se.video.library.model.base.DateAuditModel;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(name = "countries")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Country extends DateAuditModel {
+public class Country  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
