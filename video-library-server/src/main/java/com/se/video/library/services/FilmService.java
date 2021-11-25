@@ -4,6 +4,7 @@ import com.se.video.library.payload.request.FilmRequest;
 import com.se.video.library.payload.response.FilmItemResponse;
 import com.se.video.library.payload.response.FilmResponse;
 import com.se.video.library.payload.response.PagedResponse;
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -23,9 +24,11 @@ public interface FilmService {
 
     void delete(Long id);
 
-    FilmResponse getById(Long Id);
+    FilmItemResponse getById(Long Id);
 
     List<FilmItemResponse> getAll();
 
     String storeTitle(Long id, MultipartFile file);
+
+    Page<FilmResponse> getPaged(String orderBy, String direction, int page, int size);
 }

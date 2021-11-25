@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "genre")
+@Table(name = "genres")
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,4 +26,11 @@ public class Genre extends DateAuditModel {
     @Column(nullable = false, unique=true)
     private String name;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "genres")
+    private Set<Film> films = new HashSet<>();
 }

@@ -46,11 +46,6 @@ public class Film extends DateAuditModel{
     @Min(1)
     private int duration;
 
-    //исполнители могут исполнять разные песни
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private List<Country> countries = new ArrayList<>();
-//
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name = "country_films",
             joinColumns = {
@@ -62,13 +57,35 @@ public class Film extends DateAuditModel{
     private Set<Country> countries = new HashSet<>();
 
 
-    public void removeChild(Country tag) {
-        countries.remove(tag);
-        tag.setPosts(null);
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "genre_films",
+            joinColumns = {
+                    @JoinColumn(name = "film_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "genre_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)})
+    private Set<Genre> genres = new HashSet<>();
+
+
+
+    public void removeCountry(Country book) {
+        this.countries.remove(book);
+        book.getFilms().remove(this);
     }
 
-    public void addChild(Country tag) {
-        countries.add(tag);
-        tag.getPosts().add(this);
+    public void removeGenre(Genre book) {
+        this.genres.remove(book);
+        book.getFilms().remove(this);
+    }
+
+    public void addCountry(Country country) {
+        countries.add(country);
+        country.getFilms().add(this);
+    }
+
+    public void addGenre(Genre genre) {
+        genres.add(genre);
+        genre.getFilms().add(this);
     }
 }

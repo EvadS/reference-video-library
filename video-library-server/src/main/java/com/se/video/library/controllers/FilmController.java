@@ -2,6 +2,8 @@ package com.se.video.library.controllers;
 
 
 import com.se.video.library.errors.models.ErrorDetail;
+import com.se.video.library.payload.enums.Direction;
+import com.se.video.library.payload.enums.OrderBy;
 import com.se.video.library.payload.request.FilmRequest;
 import com.se.video.library.payload.response.FilmItemResponse;
 import com.se.video.library.payload.response.FilmResponse;
@@ -12,6 +14,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +25,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.util.List;
 
+
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -53,7 +65,7 @@ public class FilmController {
             })
     @GetMapping("/{id}")
     @ResponseBody
-    public FilmResponse getOne(
+    public FilmItemResponse getOne(
             @Parameter(description = "unique identifier to be searched")
             @PathVariable(name = "id") final Long id) {
 
@@ -106,14 +118,22 @@ public class FilmController {
         return new ResponseEntity(id, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/all")
+    @PostMapping("/all")
     @ResponseBody
-    public List<FilmItemResponse> getAll() {
+    public  Page<FilmResponse> getAll(@RequestBody Pageable pageable) {
+//
+//        if (!(direction.equals(Direction.ASCENDING.getDirectionCode())
+//                || direction.equals(Direction.DESCENDING.getDirectionCode()))) {//PaginationSortingException
+//            throw new RuntimeException("Invalid sort direction");
+//        }
+//        if (!(orderBy.equals(OrderBy.ID.getOrderByCode())
+//                || orderBy.equals(OrderBy.USERID.getOrderByCode()))
+//                || orderBy.equals(OrderBy.EMAIL.getOrderByCode())) {
+//            //    throw new RuntimeException("Invalid orderBy condition");
+//
+//        Page<FilmResponse> filmResponses =  filmService.getPaged(orderBy,direction,page,size);
 
-        List<FilmItemResponse> filmItemResponses = filmService.getAll();
-        return filmItemResponses;
+        return null;
     }
-
-
     // <<-- get by id block
 }

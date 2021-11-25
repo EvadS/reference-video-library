@@ -45,6 +45,4 @@ public class FilmResponse {
     private  Integer duration;
 
     private boolean isPublished =false;
-
-    private String description;
 }

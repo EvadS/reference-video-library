@@ -52,9 +52,12 @@ change spring.datasource.username and spring.datasource.password as per your mys
 
 docker build -t spring-boot-websocket-chat-demo .
 
-
+```sql
 INSERT IGNORE INTO roles(name) VALUES('ROLE_USER');
 INSERT IGNORE INTO roles(name) VALUES('ROLE_ADMIN');
+
+SELECT * FROM videodb.roles;
+```
 
 
 local swagger links
