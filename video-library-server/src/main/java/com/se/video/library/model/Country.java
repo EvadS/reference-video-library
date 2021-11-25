@@ -5,12 +5,14 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "country")
+@Table(name = "countries")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Country {
@@ -26,8 +28,16 @@ public class Country {
 //    private Set<CountryFilm> countryFilms = new HashSet<>();
 
 
-    //разные люди исполняют разные композиции
-    @ManyToMany(mappedBy = "countries",fetch = FetchType.EAGER)
-    private List<Film> films = new ArrayList<>();
+//    //разные люди исполняют разные композиции
+//    @ManyToMany(mappedBy = "countries",fetch = FetchType.EAGER)
+//    private List<Film> films = new ArrayList<>();
 
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "countries")
+    private Set<Film> posts = new HashSet<>();
 }

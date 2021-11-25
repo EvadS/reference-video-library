@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -38,6 +39,8 @@ public class FilmServiceImpl implements FilmService {
     @Transactional
     @Override
     public FilmItemResponse create(FilmRequest request) {
+
+        //TODO: check name is exists
         // check is genre exists
         request.getGenreIds().stream().forEach(i -> {
             if (!genreRepository.existsById(i)) {
@@ -67,7 +70,6 @@ public class FilmServiceImpl implements FilmService {
             film.addChild(i);
         });
 
-
         filmRepository.save(film);
 
         return FilmMapper.INSTANCE.toFilmItemResponse(film);
@@ -85,7 +87,16 @@ public class FilmServiceImpl implements FilmService {
         return filmRepository.findById(id)
                 .map(flm -> {
 
+                    flm.getCountries().clear();
+
+                    List<Country> allCountriesById = countryRepository.findAllById(request.getCountryIds());
+                    allCountriesById.stream().forEach(i->{
+                        flm.addChild(i);
+                    });
+
+
                     flm.setName(request.getName());
+
                     filmRepository.save(flm);
                     log.info("Film, id:{} updated", id);
                     return FilmMapper.INSTANCE.toFilmItemResponse(flm);
