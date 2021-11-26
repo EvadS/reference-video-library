@@ -1,6 +1,6 @@
-package com.se.video.library.model.specification;
+package com.se.video.library.dao.specification;
 
-import com.se.video.library.model.Film;
+import com.se.video.library.dao.models.Film;
 import com.se.video.library.payload.request.FilmSearchRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;

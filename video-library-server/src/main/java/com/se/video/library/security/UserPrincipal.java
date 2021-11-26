@@ -2,7 +2,7 @@ package com.se.video.library.security;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.se.video.library.model.User;
+import com.se.video.library.dao.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

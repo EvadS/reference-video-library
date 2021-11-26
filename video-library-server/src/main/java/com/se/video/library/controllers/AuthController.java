@@ -1,9 +1,8 @@
 package com.se.video.library.controllers;
 
-import com.se.video.library.ApiResponse;
+import com.se.video.library.payload.response.ApiResponse;
 import com.se.video.library.payload.request.LoginRequest;
 import com.se.video.library.payload.request.SignUpRequest;
-import com.se.video.library.payload.response.JwtAuthenticationResponse;
 import com.se.video.library.payload.response.JwtResponse;
 import com.se.video.library.services.AuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;

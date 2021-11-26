@@ -1,40 +1,32 @@
-package com.se.video.library.model.audit;
+package com.se.video.library.dao.models.audit;
 
-import org.springframework.data.annotation.CreatedBy;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
+import java.io.Serializable;
 import java.util.Date;
 
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Auditable<U> {
-    @CreatedBy
-    protected U createdBy;
+@JsonIgnoreProperties(
+        value = {"createdAt", "updatedAt"},
+        allowGetters = true
+)
+public abstract class DateAudit implements Serializable {
+
     @CreatedDate
     @Temporal(TIMESTAMP)
     protected Date creationDate;
-    @LastModifiedBy
-    protected U lastModifiedBy;
     @LastModifiedDate
     @Temporal(TIMESTAMP)
     protected Date lastModifiedDate;
-
-    public U getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(U createdBy) {
-        this.createdBy = createdBy;
-    }
 
     public Date getCreationDate() {
         return creationDate;
@@ -42,14 +34,6 @@ public abstract class Auditable<U> {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
-    }
-
-    public U getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(U lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Date getLastModifiedDate() {

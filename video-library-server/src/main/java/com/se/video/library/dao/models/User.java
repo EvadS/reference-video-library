@@ -1,4 +1,4 @@
-package com.se.video.library.model;
+package com.se.video.library.dao.models;
 
 
 

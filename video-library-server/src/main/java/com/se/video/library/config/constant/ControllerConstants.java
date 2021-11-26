@@ -1,4 +1,4 @@
-package com.se.video.library.config;
+package com.se.video.library.config.constant;
 
 public class ControllerConstants {
 

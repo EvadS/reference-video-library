@@ -1,6 +1,5 @@
 package com.se.video.library.services;
 
-import com.se.video.library.ApiResponse;
 import com.se.video.library.payload.request.LoginRequest;
 import com.se.video.library.payload.request.SignUpRequest;
 import com.se.video.library.payload.response.JwtAuthenticationResponse;

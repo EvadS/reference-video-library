@@ -1,6 +1,6 @@
 package com.se.video.library.mappers;
 
-import com.se.video.library.model.Country;
+import com.se.video.library.dao.models.Country;
 import com.se.video.library.payload.request.CountryItemResponse;
 import com.se.video.library.payload.response.CountryResponse;
 import org.mapstruct.Mapper;

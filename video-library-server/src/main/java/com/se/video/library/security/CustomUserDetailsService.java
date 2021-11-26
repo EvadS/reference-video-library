@@ -2,8 +2,8 @@ package com.se.video.library.security;
 
 
 import com.se.video.library.errors.exception.ResourceNotFoundException;
-import com.se.video.library.model.User;
-import com.se.video.library.model.repository.UserRepository;
+import com.se.video.library.dao.models.User;
+import com.se.video.library.dao.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

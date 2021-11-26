@@ -1,10 +1,8 @@
-package com.se.video.library.model;
+package com.se.video.library.dao.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.se.video.library.dao.models.Film;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

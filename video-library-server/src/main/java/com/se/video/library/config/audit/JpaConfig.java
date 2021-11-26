@@ -1,4 +1,4 @@
-package com.se.video.library.model.audit;
+package com.se.video.library.config.audit;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

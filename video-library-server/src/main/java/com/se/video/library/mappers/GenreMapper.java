@@ -1,6 +1,6 @@
 package com.se.video.library.mappers;
 
-import com.se.video.library.model.Genre;
+import com.se.video.library.dao.models.Genre;
 import com.se.video.library.payload.request.GenreItemResponse;
 import com.se.video.library.payload.response.GenreResponse;
 import org.mapstruct.Mapper;

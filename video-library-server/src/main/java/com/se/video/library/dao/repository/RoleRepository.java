@@ -1,7 +1,7 @@
-package com.se.video.library.model.repository;
+package com.se.video.library.dao.repository;
 
-import com.se.video.library.model.Role;
-import com.se.video.library.model.RoleName;
+import com.se.video.library.dao.models.Role;
+import com.se.video.library.dao.models.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

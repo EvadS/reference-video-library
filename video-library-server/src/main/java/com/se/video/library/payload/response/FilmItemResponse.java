@@ -20,7 +20,6 @@ import java.util.List;
 @Builder(toBuilder = true)
 public class FilmItemResponse {
 
-
     @Schema(description = "unique identifier of the film.",
             example = "1", required = true)
     private Long id;

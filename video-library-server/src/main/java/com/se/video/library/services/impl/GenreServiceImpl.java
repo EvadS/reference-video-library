@@ -1,7 +1,7 @@
 package com.se.video.library.services.impl;
 
-import com.se.video.library.model.Genre;
-import com.se.video.library.model.repository.GenreRepository;
+import com.se.video.library.dao.models.Genre;
+import com.se.video.library.dao.repository.GenreRepository;
 import com.se.video.library.errors.exception.AlreadyExistException;
 import com.se.video.library.mappers.GenreMapper;
 import com.se.video.library.payload.request.GenreItemResponse;

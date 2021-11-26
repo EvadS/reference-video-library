@@ -1,4 +1,4 @@
-package com.se.video.library;
+package com.se.video.library.payload.response;
 
 public class ApiResponse {
     private Boolean success;

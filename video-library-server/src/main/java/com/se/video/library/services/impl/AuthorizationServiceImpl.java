@@ -2,11 +2,11 @@ package com.se.video.library.services.impl;
 
 import com.se.video.library.errors.exception.AlreadyExistException;
 import com.se.video.library.errors.exception.AppException;
-import com.se.video.library.model.Role;
-import com.se.video.library.model.RoleName;
-import com.se.video.library.model.User;
-import com.se.video.library.model.repository.RoleRepository;
-import com.se.video.library.model.repository.UserRepository;
+import com.se.video.library.dao.models.Role;
+import com.se.video.library.dao.models.RoleName;
+import com.se.video.library.dao.models.User;
+import com.se.video.library.dao.repository.RoleRepository;
+import com.se.video.library.dao.repository.UserRepository;
 import com.se.video.library.payload.request.LoginRequest;
 import com.se.video.library.payload.request.SignUpRequest;
 import com.se.video.library.payload.response.JwtAuthenticationResponse;
@@ -20,7 +20,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

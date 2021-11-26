@@ -1,4 +1,4 @@
-package com.se.video.library.model.specification;
+package com.se.video.library.dao.specification;
 
 import org.springframework.data.jpa.domain.Specification;
 
