@@ -115,7 +115,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/api/auth/**").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers("/admin/*").hasRole("ADMIN")
-                //.antMatchers("/**").permitAll()
+                // TODO: for testing
+                .antMatchers("/**").permitAll()
                 .anyRequest()
                 .authenticated();
 

@@ -29,7 +29,7 @@ public interface FilmService {
 
     List<FilmResponse> getAll();
 
-    String storeTitle(Long id, MultipartFile file);
+    String storeTitle(Long id,  MultipartFile file);
 
     Page<FilmItemResponse> getPaged(FilmSearchRequest request, String[] sort);
 }

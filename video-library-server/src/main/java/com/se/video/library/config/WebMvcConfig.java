@@ -25,8 +25,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .maxAge(MAX_AGE_SECS);
     }
 
-    @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurer.addPathPrefix(ControllerConstants.PATH_PREFIX, HandlerTypePredicate.forBasePackageClass(FilmController.class));
-    }
+//    @Override
+//    public void configurePathMatch(PathMatchConfigurer configurer) {
+//        configurer.addPathPrefix(ControllerConstants.PATH_PREFIX, HandlerTypePredicate.forBasePackageClass(FilmController.class));
+//    }
 }

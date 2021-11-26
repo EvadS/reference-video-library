@@ -32,10 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -184,10 +181,10 @@ public class FilmServiceImpl implements FilmService {
 
         String filePath = fileStorageService.storeFile(file);
 
-
+        String generatedName = UUID.randomUUID().toString();
         FileItem fileEntity = new FileItem();
 
-        fileEntity.setName("FILE_NAME");
+        fileEntity.setName(generatedName);
         fileEntity.setFilePath(filePath);
 
         fileRepository.save(fileEntity);

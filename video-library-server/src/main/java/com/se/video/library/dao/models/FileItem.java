@@ -33,7 +33,6 @@ public class FileItem extends UserDateAudit<String> {
 
     @NotBlank
     @Size(max = 100)
-    @Column(unique=true)
     private String filePath;
 
     @ManyToMany(fetch = FetchType.LAZY,
