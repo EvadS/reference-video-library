@@ -95,8 +95,7 @@ public class FilmServiceImpl implements FilmService {
         return FilmMapper.INSTANCE.toFilmItemResponse(film);
     }
 
-    // Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
-    @Override
+     @Override
     public PagedResponse<FilmItemResponse> getAllPaged(int page, int size) {
         return null;
     }
@@ -177,9 +176,6 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public String storeTitle(Long id, MultipartFile file) {
-
-        Film film = filmRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Film", "id", id));
 
         String fileName = fileStorageService.storeFile(file);
         return fileName;

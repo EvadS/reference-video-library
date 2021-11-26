@@ -24,7 +24,7 @@ public class AuthController {
     AuthorizationService authorizationService;
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         JwtResponse jwtResponse = authorizationService.authenticateUser(loginRequest);
         return ResponseEntity.ok(jwtResponse);

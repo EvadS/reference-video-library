@@ -69,7 +69,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public void registerUser(@Valid SignUpRequest signUpRequest) {
-        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if(userRepository.existsByUsername(signUpRequest.getUsername()).booleanValue()) {
             throw new AlreadyExistException("user", "user name", signUpRequest.getUsername());
         }
 

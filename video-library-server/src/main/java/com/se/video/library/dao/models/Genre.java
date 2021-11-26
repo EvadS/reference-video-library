@@ -1,7 +1,6 @@
 package com.se.video.library.dao.models;
 
 
-import com.se.video.library.dao.models.Film;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,13 +11,13 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "genres")
-public class Genre  {
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Column(nullable = false, unique=true)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY,

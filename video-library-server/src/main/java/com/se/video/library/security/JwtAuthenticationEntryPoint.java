@@ -50,8 +50,6 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         PrintWriter writer = httpServletResponse.getWriter();
         writer.write(convertObjectToJson(errorDetail));
         writer.flush();
-
-        return;
     }
 
     public String convertObjectToJson(Object object) throws JsonProcessingException {

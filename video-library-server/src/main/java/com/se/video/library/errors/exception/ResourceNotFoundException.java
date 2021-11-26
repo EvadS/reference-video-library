@@ -12,7 +12,6 @@ public class ResourceNotFoundException extends RuntimeException {
     private String fieldName;
     private Object fieldValue;
 
-
     /**
      * Instantiates a new instance of {@link ResourceNotFoundException}.
      *

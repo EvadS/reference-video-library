@@ -2,6 +2,8 @@ package com.se.video.library.controllers;
 
 public class GeneralConstants {
 
+    private GeneralConstants(){}
+
     public static final String HTTP_OK_ITEM = "Request was successful and the content items are returned.";
     public static final String HTTP_OK_CREATED = "Item successful created.";
     public static final String HTTP_OK_PAGED = "Paged response.";
@@ -20,5 +22,4 @@ public class GeneralConstants {
     public static final String HTTP_ALREADY_EXISTS = "Resource already exists";
     public static final String INCORRECT_REQUEST_PARAM = "Unprocessable Entity";
 
-    public static  final  String dateFormat = "dd MMM yyyy";
 }

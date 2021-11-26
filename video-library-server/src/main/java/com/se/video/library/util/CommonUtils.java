@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CommonUtils {
+
+    private CommonUtils(){}
     /**
      * Utility method to convert object to json string
      * @param object
