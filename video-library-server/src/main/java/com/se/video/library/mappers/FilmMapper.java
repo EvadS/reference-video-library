@@ -16,9 +16,9 @@ public interface FilmMapper {
 
     FilmMapper INSTANCE = Mappers.getMapper(FilmMapper.class);
 
-    FilmResponse toFilmResponse (Film filmEntity);
+    FilmItemResponse toFilmResponse (Film filmEntity);
 
-    FilmItemResponse toFilmItemResponse(Film filmEntity);
+    FilmResponse toFilmItemResponse(Film filmEntity);
 
     default Genre map(int value){
         return  Genre.COMEDY;

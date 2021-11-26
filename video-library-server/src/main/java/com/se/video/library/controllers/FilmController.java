@@ -40,7 +40,7 @@ public class FilmController {
                     @ApiResponse(responseCode = "200", description = "Successfully retrieved Product data",
                             content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = FilmResponse.class))),
+                                    schema = @Schema(implementation = FilmItemResponse.class))),
                     @ApiResponse(responseCode = "404",
                             description = GeneralConstants.NOT_FOUND,
                             content = @Content(schema = @Schema(implementation = ErrorDetail.class))),
@@ -53,7 +53,7 @@ public class FilmController {
             })
     @GetMapping("/{id}")
     @ResponseBody
-    public FilmItemResponse getOne(
+    public FilmResponse getOne(
             @Parameter(description = "unique identifier to be searched")
             @PathVariable(name = "id") final Long id) {
 
@@ -79,23 +79,23 @@ public class FilmController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<FilmItemResponse> create(
+    public ResponseEntity<FilmResponse> create(
             @Parameter(description = "film model")
             @RequestBody @Valid FilmRequest request) {
-        FilmItemResponse filmItemResponse = filmService.create(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(filmItemResponse);
+        FilmResponse filmResponse = filmService.create(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(filmResponse);
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<FilmItemResponse> update(
+    public ResponseEntity<FilmResponse> update(
             @Parameter(description = "unique identifier to be searched")
             @PathVariable(name = "id") final Long id,
             @Parameter(description = "file model")
             @RequestBody @Valid FilmRequest request) {
 
-        FilmItemResponse filmItemResponse = filmService.update(id, request);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(filmItemResponse);
+        FilmResponse filmResponse = filmService.update(id, request);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(filmResponse);
     }
 
     @DeleteMapping("/{id}")
@@ -110,11 +110,11 @@ public class FilmController {
     //sort=duration,asc&name,desc
     @PostMapping("/search")
     @ResponseBody
-    public Page<FilmResponse> getAll(
+    public Page<FilmItemResponse> getAll(
             @RequestParam(defaultValue = "id,desc") String[] sort,
             @RequestBody @Valid FilmSearchRequest request) {
 
-        Page<FilmResponse> filmResponses = filmService.getPaged(request,sort);
+        Page<FilmItemResponse> filmResponses = filmService.getPaged(request,sort);
 
         return filmResponses;
     }

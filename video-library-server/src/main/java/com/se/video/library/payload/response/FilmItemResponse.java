@@ -1,8 +1,6 @@
 package com.se.video.library.payload.response;
 
 import com.se.video.library.payload.enums.Genre;
-import com.se.video.library.payload.request.CountryItemResponse;
-import com.se.video.library.payload.request.GenreItemResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,8 +9,6 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.List;
-
 
 @Data
 @NoArgsConstructor
@@ -30,6 +26,13 @@ public class FilmItemResponse {
             example = "Film", required = true)
     private String name;
 
+    private Genre genre;
+
+    @NotNull(message = "Year cannot be null")
+    @Schema(description = "Year of the film.",
+            example = "2000", title ="year", required = true)
+    private Integer year;
+
     @NotNull(message = "Director cannot be null")
     @NotBlank(message = "Director cannot be Empty")
     @Schema(description = "Director of the film.",
@@ -39,11 +42,7 @@ public class FilmItemResponse {
     @NotNull(message = "Duration cannot be null")
     @Schema(description = "Duration of the film in minutes.",
             example = "121", title ="duration", required = true)
-    private Integer duration;
+    private  Integer duration;
 
     private boolean isPublished =false;
-
-    private List<CountryItemResponse> countries;
-
-    private List<GenreItemResponse>genres;
 }

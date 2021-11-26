@@ -17,19 +17,19 @@ public interface FilmService {
      * @param request provide information about new film
      * @return provide information about created film
      */
-    FilmItemResponse create(FilmRequest request);
+    FilmResponse create(FilmRequest request);
 
-    PagedResponse<FilmItemResponse> getAllPaged(int page, int size);
+    PagedResponse<FilmResponse> getAllPaged(int page, int size);
 
-    FilmItemResponse update(Long id, FilmRequest request);
+    FilmResponse update(Long id, FilmRequest request);
 
     void delete(Long id);
 
-    FilmItemResponse getById(Long Id);
+    FilmResponse getById(Long Id);
 
-    List<FilmItemResponse> getAll();
+    List<FilmResponse> getAll();
 
     String storeTitle(Long id, MultipartFile file);
 
-    Page<FilmResponse> getPaged(FilmSearchRequest request,String[] sort);
+    Page<FilmItemResponse> getPaged(FilmSearchRequest request, String[] sort);
 }

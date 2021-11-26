@@ -50,7 +50,7 @@ public class FilmServiceImpl implements FilmService {
 
     @Transactional
     @Override
-    public FilmItemResponse create(FilmRequest request) {
+    public FilmResponse create(FilmRequest request) {
 
         Optional<Film> byName = filmRepository.findByName(request.getName());
         if (byName.isPresent()) {
@@ -96,12 +96,12 @@ public class FilmServiceImpl implements FilmService {
     }
 
      @Override
-    public PagedResponse<FilmItemResponse> getAllPaged(int page, int size) {
+    public PagedResponse<FilmResponse> getAllPaged(int page, int size) {
         return null;
     }
 
     @Override
-    public FilmItemResponse update(Long id, FilmRequest request) {
+    public FilmResponse update(Long id, FilmRequest request) {
 
         Optional<Film> byNameAndIdNot = filmRepository.findByNameAndIdNot(request.getName(), id);
         if(byNameAndIdNot.isPresent()){
@@ -160,7 +160,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public FilmItemResponse getById(Long id) {
+    public FilmResponse getById(Long id) {
         Film film = filmRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Film", "id", id));
 
@@ -168,7 +168,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public List<FilmItemResponse> getAll() {
+    public List<FilmResponse> getAll() {
         return filmRepository.findAll().stream()
                 .map(FilmMapper.INSTANCE::toFilmItemResponse)
                 .collect(Collectors.toList());
@@ -182,7 +182,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Page<FilmResponse> getPaged(FilmSearchRequest request, String[] sort) {
+    public Page<FilmItemResponse> getPaged(FilmSearchRequest request, String[] sort) {
         List<Order> orders = new ArrayList<Order>();
 
         if (sort[0].contains(",")) {
@@ -202,7 +202,7 @@ public class FilmServiceImpl implements FilmService {
                 Sort.by(orders));
 
 
-        Page<FilmResponse> pagedFilmResponse = filmRepository.findAll(filmSpecification.getFilter(request),
+        Page<FilmItemResponse> pagedFilmResponse = filmRepository.findAll(filmSpecification.getFilter(request),
                 pageable)
                 .map(FilmMapper.INSTANCE::toFilmResponse);
 
