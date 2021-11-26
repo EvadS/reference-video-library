@@ -1,5 +1,7 @@
 package com.se.video.library.services.impl;
 
+import com.se.video.library.dao.models.FileItem;
+import com.se.video.library.dao.repository.FileRepository;
 import com.se.video.library.errors.exception.AlreadyExistException;
 import com.se.video.library.errors.exception.ResourceNotFoundException;
 import com.se.video.library.mappers.FilmMapper;
@@ -29,6 +31,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -45,6 +48,8 @@ public class FilmServiceImpl implements FilmService {
 
     private final GenreRepository genreRepository;
     private final CountryRepository countryRepository;
+    private final FileRepository fileRepository;
+
     @Autowired
     FilmSpecification filmSpecification;
 
@@ -177,8 +182,17 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public String storeTitle(Long id, MultipartFile file) {
 
-        String fileName = fileStorageService.storeFile(file);
-        return fileName;
+        String filePath = fileStorageService.storeFile(file);
+
+
+        FileItem fileEntity = new FileItem();
+
+        fileEntity.setName("FILE_NAME");
+        fileEntity.setFilePath(filePath);
+
+        fileRepository.save(fileEntity);
+
+        return filePath;
     }
 
     @Override

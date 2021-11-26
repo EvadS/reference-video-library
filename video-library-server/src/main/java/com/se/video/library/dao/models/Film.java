@@ -65,6 +65,17 @@ public class Film  extends UserDateAudit<String> {
 
 
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "files_films",
+            joinColumns = {
+                    @JoinColumn(name = "film_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "file_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)})
+    private Set<FileItem> files = new HashSet<>();
+
+
     public void removeCountry(Country book) {
         this.countries.remove(book);
         book.getFilms().remove(this);
@@ -83,5 +94,15 @@ public class Film  extends UserDateAudit<String> {
     public void addGenre(Genre genre) {
         genres.add(genre);
         genre.getFilms().add(this);
+    }
+
+    // file relation
+    public void addFiles(FileItem file) {
+        files.add(file);
+        file.getFilms().add(this);
+    }
+    public void removeFile(FileItem file) {
+        this.files.remove(file);
+        file.getFilms().remove(this);
     }
 }

@@ -64,7 +64,7 @@ public class FilmController {
     @PatchMapping("/file/{id}")
     public ResponseEntity<String> uploadImage(
             @RequestParam("file") MultipartFile file,
-            @Parameter(description = "unique identifier to be searched")
+            @Parameter(description = "unique identifier for film")
             @PathVariable(name = "id") final Long id) {
 
         String fileName = filmService.storeTitle(id, file);

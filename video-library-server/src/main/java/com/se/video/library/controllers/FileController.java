@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+@Deprecated
 @RestController
 @RequestMapping("/file")
 public class FileController {
