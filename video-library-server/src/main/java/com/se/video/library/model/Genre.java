@@ -14,9 +14,6 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "genres")
-@Builder(toBuilder = true)
-@AllArgsConstructor
-@NoArgsConstructor
 public class Genre  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

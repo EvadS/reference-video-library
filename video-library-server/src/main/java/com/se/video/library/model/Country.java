@@ -1,7 +1,9 @@
 package com.se.video.library.model;
 
 
+import com.se.video.library.model.audit.Auditable;
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -14,9 +16,8 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "countries")
-@AllArgsConstructor
-@NoArgsConstructor
-public class Country  {
+@EntityListeners(AuditingEntityListener.class)
+public class Country extends Auditable<String> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
