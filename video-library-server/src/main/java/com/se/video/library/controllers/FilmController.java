@@ -1,6 +1,7 @@
 package com.se.video.library.controllers;
 
 
+import com.se.video.library.config.constant.ControllerConstants;
 import com.se.video.library.errors.models.ErrorDetail;
 import com.se.video.library.payload.request.FilmSearchRequest;
 import com.se.video.library.payload.request.FilmRequest;
@@ -70,7 +71,7 @@ public class FilmController {
         String fileName = filmService.storeTitle(id, file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+                .path("/" + ControllerConstants.FILES_URI+ "/")
                 .path(fileName)
                 .toUriString();
 

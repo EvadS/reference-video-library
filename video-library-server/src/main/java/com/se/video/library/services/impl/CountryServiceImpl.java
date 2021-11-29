@@ -1,9 +1,12 @@
 package com.se.video.library.services.impl;
 
 import com.se.video.library.dao.models.Country;
+import com.se.video.library.dao.models.Film;
 import com.se.video.library.dao.repository.CountryRepository;
 import com.se.video.library.errors.exception.AlreadyExistException;
+import com.se.video.library.errors.exception.ResourceNotFoundException;
 import com.se.video.library.mappers.CountryMapper;
+import com.se.video.library.mappers.FilmMapper;
 import com.se.video.library.payload.request.CountryItemResponse;
 import com.se.video.library.payload.request.CountryRequest;
 import com.se.video.library.payload.response.CountryResponse;
@@ -45,5 +48,13 @@ public class CountryServiceImpl implements CountryService {
         return countryRepository.findAll().stream()
                 .map(CountryMapper.INSTANCE::toCountryItemResponse)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public CountryResponse getById(Long id) {
+         Country country = countryRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Country", "id", id));
+
+        return CountryMapper.INSTANCE.toCountryResponse(country);
     }
 }

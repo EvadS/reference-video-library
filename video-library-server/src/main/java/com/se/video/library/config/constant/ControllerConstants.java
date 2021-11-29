@@ -8,4 +8,10 @@ public class ControllerConstants {
 
     public  static  final String  BASE_PATH = "/api/v1";
     public  static  final String  FILM_API_PATH = "/film";
+
+    public static  final  String FILES_URI = "/images/";
+
+    public  static  final String COUNTRY_API = "/country";
+    public static  final  String COUNTRY_BY_ID = "/{id}";
+
 }

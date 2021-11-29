@@ -11,4 +11,6 @@ public interface CountryService {
     CountryResponse create (CountryRequest countryRequest);
 
     List<CountryItemResponse> getAll();
+
+    CountryResponse getById(Long id);
 }

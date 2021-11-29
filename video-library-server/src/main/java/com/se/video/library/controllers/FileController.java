@@ -1,7 +1,7 @@
 package com.se.video.library.controllers;
 
 import com.se.video.library.payload.response.UploadFileResponse;
-import com.se.video.library.services.FileStorageService;
+import com.se.video.library.services.MyFileStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +27,11 @@ public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @Autowired
-    private FileStorageService fileStorageService;
+    private MyFileStorageService myFileStorageService;
 
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        String fileName = fileStorageService.storeFile(file);
+        String fileName = myFileStorageService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
@@ -53,7 +53,7 @@ public class FileController {
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
-        Resource resource = fileStorageService.loadFileAsResource(fileName);
+        Resource resource = myFileStorageService.loadFileAsResource(fileName);
 
         // Try to determine file's content type
         String contentType = null;

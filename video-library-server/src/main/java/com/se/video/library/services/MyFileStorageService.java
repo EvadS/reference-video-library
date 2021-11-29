@@ -18,12 +18,13 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @Service
-public class FileStorageService {
+public class MyFileStorageService {
 
     private final Path fileStorageLocation;
 
+
     @Autowired
-    public FileStorageService(FileStorageProperties fileStorageProperties) {
+    public MyFileStorageService(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
 

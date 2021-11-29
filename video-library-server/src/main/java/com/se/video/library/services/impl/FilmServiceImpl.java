@@ -12,13 +12,18 @@ import com.se.video.library.dao.repository.CountryRepository;
 import com.se.video.library.dao.repository.FilmRepository;
 import com.se.video.library.dao.repository.GenreRepository;
 import com.se.video.library.dao.specification.FilmSpecification;
+import com.se.video.library.payload.FileDataModel;
+import com.se.video.library.payload.enums.MediaResourceType;
 import com.se.video.library.payload.request.FilmRequest;
 import com.se.video.library.payload.request.FilmSearchRequest;
 import com.se.video.library.payload.response.FilmItemResponse;
 import com.se.video.library.payload.response.FilmResponse;
 import com.se.video.library.payload.response.PagedResponse;
-import com.se.video.library.services.FileStorageService;
+import com.se.video.library.services.FileStoreService;
+import com.se.video.library.services.MyFileStorageService;
 import com.se.video.library.services.FilmService;
+import com.se.video.library.util.ImageUtils;
+import com.se.video.library.util.ResizeModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +35,11 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
-import java.nio.file.Files;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,7 +49,7 @@ import java.util.stream.Collectors;
 public class FilmServiceImpl implements FilmService {
 
     private final FilmRepository filmRepository;
-    private final FileStorageService fileStorageService;
+    private final MyFileStorageService myFileStorageService;
 
     private final GenreRepository genreRepository;
     private final CountryRepository countryRepository;
@@ -49,6 +57,9 @@ public class FilmServiceImpl implements FilmService {
 
     @Autowired
     FilmSpecification filmSpecification;
+
+    @Autowired
+    FileStoreService fileStoreService;
 
     @Transactional
     @Override
@@ -179,7 +190,12 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public String storeTitle(Long id, MultipartFile file) {
 
-        String filePath = fileStorageService.storeFile(file);
+        MediaResourceType film = MediaResourceType.FILM;
+
+        FileDataModel fileDataModel = new FileDataModel(id, file, film);
+
+        String filePath = fileStoreService.updateMediaName("5300d443-eb37-43f8-9a5e-9a281d70c639",fileDataModel);
+    //    String filePath = myFileStorageService.storeFile(file);
 
         String generatedName = UUID.randomUUID().toString();
         FileItem fileEntity = new FileItem();
@@ -189,7 +205,16 @@ public class FilmServiceImpl implements FilmService {
 
         fileRepository.save(fileEntity);
 
-        return filePath;
+        String savedFilePath = fileStoreService.getFilePath(id, film,filePath);
+
+        String fileUrl= film +"/" + String.valueOf(id) +"/" + filePath;
+
+        ///images/FILM/2/bender_small.jpg
+
+
+
+        return fileUrl;
+
     }
 
     @Override
