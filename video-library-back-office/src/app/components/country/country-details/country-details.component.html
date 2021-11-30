@@ -36,9 +36,10 @@
                         type="submit"
                 >Submit
                 </button>
-                <button class="btn btn-secondary" type="reset"
-                        routerLink="/countries"
-                >Reset</button>
+                <button class="btn btn-secondary" routerLink="/countries"
+                        type="reset"
+                >Reset
+                </button>
               </div>
             </form>
           </div>
@@ -49,7 +50,7 @@
 
     <div class="row">
       <div *ngIf="!currentTutorial.id">
-        <br />
+        <br/>
         <p>Cannot access this Country...</p>
       </div>
     </div>

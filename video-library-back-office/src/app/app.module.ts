@@ -22,6 +22,7 @@ import { FilmsComponent } from './components/films/films.component';
 import { CountryListComponent } from './components/country/country-list/country-list.component';
 import { AddCountryComponent } from './components/country/add-country/add-country.component';
 import { CountryDetailsComponent } from './components/country/country-details/country-details.component';
+import { LibraryComponent } from './components/library/library.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -32,7 +33,9 @@ const routes: Routes = [
   {path: 'users', component: UsersComponent},
   {path: 'films', component: FilmsComponent},
   {path: 'countries', component: CountryListComponent},
-  { path: 'countries/:id', component: CountryDetailsComponent },
+  {path: 'countries', component: CountryListComponent},
+
+  { path: 'library', component: LibraryComponent },
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
@@ -51,6 +54,7 @@ const routes: Routes = [
     CountryListComponent,
     AddCountryComponent,
     CountryDetailsComponent,
+    LibraryComponent,
 
   ],
   imports: [
