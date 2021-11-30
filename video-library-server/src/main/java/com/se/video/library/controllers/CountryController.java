@@ -70,7 +70,7 @@ public class CountryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
+    public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
         try {
             countryService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
