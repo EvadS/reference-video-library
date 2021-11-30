@@ -1,0 +1,101 @@
+<main class="main" id="main">
+
+  <div class="pagetitle">
+    <h1>Film management</h1>
+  </div>
+  <section class="section">
+    <div class="list row">
+      <div class="col-md-8">
+        <div class="input-group mb-3">
+          <input
+            [(ngModel)]="title"
+            class="form-control"
+            placeholder="Search by title"
+            type="text"
+          />
+          <div class="input-group-append">
+            <button
+              (click)="searchTitle()"
+              class="btn btn-outline-secondary"
+              type="button"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="list row">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Countries Table</h5>
+            <!-- Default Table -->
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Enabled</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr (click)="setActive(country,country.id)"
+                  *ngFor="let country of films"
+                  [class.active]="country.id == currentIndex"
+              >
+                <th scope="row">{{ country.id }}</th>
+                <th scope="row">{{ country.name}}</th>
+                <th scope="row">{{ country.enabled}}</th>
+              </tbody>
+            </table>
+            <!-- End Default Table Example -->
+          </div>
+
+          <button (click)="removeAll()" class="m-3 btn btn-sm btn-danger">
+            Remove All
+          </button>
+        </div>
+      </div>
+
+
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Film Details</h5>
+            <div *ngIf="currentFilm.id" class="edit-form">
+              <form>
+                <div class="card-text">
+                  <div>
+                    <label><strong>Title:</strong></label> {{ currentFilm.name }}
+                  </div>
+                </div>
+
+                <div class="card-text">
+                  <div>
+                    <label><strong>Status:</strong></label>
+                    {{ currentFilm.enabled ? "Published" : "Pending" }}
+                  </div>
+                </div>
+
+                <div class="card-text">
+                  <button class="btn btn-warning" routerLink="/films/{{ currentFilm.id }}">
+                    Edit
+                  </button>
+                </div>
+
+              </form>
+              <div *ngIf="!currentFilm">
+                <br/>
+                <p>Please click on a Tutorial...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>

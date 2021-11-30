@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -116,6 +117,15 @@ public class FilmController {
             @RequestBody @Valid FilmSearchRequest request) {
 
         Page<FilmItemResponse> filmResponses = filmService.getPaged(request,sort);
+
+        return filmResponses;
+    }
+
+    @GetMapping("/list")
+    @ResponseBody
+    public List<FilmResponse> getAll() {
+
+        List<FilmResponse> filmResponses = filmService.getAll();
 
         return filmResponses;
     }
