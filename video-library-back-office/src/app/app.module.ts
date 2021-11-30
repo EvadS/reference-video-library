@@ -32,6 +32,7 @@ const routes: Routes = [
   {path: 'users', component: UsersComponent},
   {path: 'films', component: FilmsComponent},
   {path: 'countries', component: CountryListComponent},
+  { path: 'countries/:id', component: CountryDetailsComponent },
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

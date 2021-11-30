@@ -57,25 +57,40 @@
 
     <div class="col-lg-6">
       <div class="card">
-        <div *ngIf="currentTutorial.id">
-          <h4>Country</h4>
-          <div>
-            <label><strong>Title:</strong></label> {{ currentTutorial.name }}
-          </div>
-          <div>
-            <label><strong>Status:</strong></label>
-            {{ currentTutorial.enabled ? "Published" : "Pending" }}
+
+        <div class="card-body">
+          <h5 class="card-title">Countries Information</h5>
+
+          <div *ngIf="currentTutorial.id">
+            <div class="card-text">
+              <div>
+                <label><strong>Title:</strong></label> {{ currentTutorial.name }}
+              </div>
+            </div>
+
+            <div class="card-text">
+              <div>
+                <label><strong>Status:</strong></label>
+                {{ currentTutorial.enabled ? "Published" : "Pending" }}
+              </div>
+
+            </div>
+            <div class="card-text">
+              <button class="btn btn-warning" routerLink="/countries/{{ currentTutorial.id }}">
+                Edit
+              </button>
+            </div>
+
+
           </div>
 
-          <a class="badge badge-warning" routerLink="/tutorials/{{ currentTutorial.id }}">
-            Edit
-          </a>
+          <div *ngIf="!currentTutorial">
+            <br/>
+            <p>Please click on a Tutorial...</p>
+          </div>
+
         </div>
 
-        <div *ngIf="!currentTutorial">
-          <br/>
-          <p>Please click on a Tutorial...</p>
-        </div>
       </div>
     </div>
   </div>

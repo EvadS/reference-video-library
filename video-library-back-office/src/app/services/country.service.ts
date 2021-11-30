@@ -20,7 +20,7 @@ export class CountryService {
   }
 
   get(id: any): Observable<Country> {
-    return this.http.get(`${baseUrl}/${id}`);
+    return this.http.get(baseUrl+ "/" + id);
   }
 
   create(data: any): Observable<any> {

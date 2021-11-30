@@ -9,6 +9,7 @@ import com.se.video.library.mappers.CountryMapper;
 import com.se.video.library.mappers.FilmMapper;
 import com.se.video.library.payload.request.CountryItemResponse;
 import com.se.video.library.payload.request.CountryRequest;
+import com.se.video.library.payload.response.CountryDetailsResponse;
 import com.se.video.library.payload.response.CountryResponse;
 import com.se.video.library.services.CountryService;
 import org.springframework.stereotype.Service;
@@ -69,11 +70,13 @@ public class CountryServiceImpl implements CountryService {
 
 
     @Override
-    public CountryResponse getById(Long id) {
+    public CountryDetailsResponse getById(Long id) {
          Country country = countryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Country", "id", id));
 
-        return CountryMapper.INSTANCE.toCountryResponse(country);
+        CountryDetailsResponse countryResponse = new CountryDetailsResponse(country.getId(), country.getName(), true);
+
+        return countryResponse;
     }
 
     @Override

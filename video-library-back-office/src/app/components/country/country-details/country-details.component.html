@@ -1,1 +1,58 @@
-<p>country-details works!</p>
+<main class="main" id="main">
+
+  <section class="section">
+    <div class="row">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Country</h5>
+          <div *ngIf="currentTutorial.id" class="edit-form">
+            <form>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="name">Name</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="currentTutorial.name"
+                         class="form-control"
+                         type="text">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-sm-10 offset-sm-2">
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           id="gridCheck1" type="checkbox"
+                           value="{{currentTutorial.enabled}}"
+                    >
+                    <label class="form-check-label" for="gridCheck1">
+                      {{ currentTutorial.enabled ? "Published" : "Pending" }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button (click)="updateTutorial()"
+                        class="btn btn-primary"
+                        type="submit"
+                >Submit
+                </button>
+                <button class="btn btn-secondary" type="reset"
+                        routerLink="/countries"
+                >Reset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div *ngIf="!currentTutorial.id">
+        <br />
+        <p>Cannot access this Country...</p>
+      </div>
+    </div>
+
+  </section>
+</main>
