@@ -10,7 +10,11 @@ public interface CountryService {
 
     CountryResponse create (CountryRequest countryRequest);
 
-    List<CountryItemResponse> getAll();
+    List<CountryItemResponse> getAll(String title);
 
     CountryResponse getById(Long id);
+
+    void deleteById(long id);
+
+    void deleteAll();
 }

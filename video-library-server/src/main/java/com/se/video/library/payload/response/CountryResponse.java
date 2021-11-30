@@ -17,4 +17,6 @@ public class CountryResponse {
     private long id;
 
     private CountryRequest countryRequest;
+
+    private boolean enabled= false;
 }

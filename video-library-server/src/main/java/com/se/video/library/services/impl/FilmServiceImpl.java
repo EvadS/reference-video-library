@@ -211,8 +211,6 @@ public class FilmServiceImpl implements FilmService {
 
         ///images/FILM/2/bender_small.jpg
 
-
-
         return fileUrl;
 
     }

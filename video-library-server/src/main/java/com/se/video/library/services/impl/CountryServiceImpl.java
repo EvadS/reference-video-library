@@ -43,12 +43,30 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public List<CountryItemResponse> getAll() {
+    public List<CountryItemResponse> getAll(String title) {
 
+        //TODO: implement search logic
+        //        try {
+//            List<Tutorial> tutorials = new ArrayList<Tutorial>();
+//
+//            if (title == null)
+//                tutorialRepository.findAll().forEach(tutorials::add);
+//            else
+//                tutorialRepository.findByTitleContaining(title).forEach(tutorials::add);
+//
+//            if (tutorials.isEmpty()) {
+//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            }
+//
+//            return new ResponseEntity<>(tutorials, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
         return countryRepository.findAll().stream()
                 .map(CountryMapper.INSTANCE::toCountryItemResponse)
                 .collect(Collectors.toList());
     }
+
 
     @Override
     public CountryResponse getById(Long id) {
@@ -56,5 +74,15 @@ public class CountryServiceImpl implements CountryService {
                 .orElseThrow(() -> new ResourceNotFoundException("Country", "id", id));
 
         return CountryMapper.INSTANCE.toCountryResponse(country);
+    }
+
+    @Override
+    public void deleteById(long id) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
     }
 }

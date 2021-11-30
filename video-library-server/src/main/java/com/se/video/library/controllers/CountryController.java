@@ -35,12 +35,28 @@ public class CountryController {
         return ResponseEntity.status(HttpStatus.CREATED).body(countryResponse);
     }
 
-    @GetMapping
+    @PutMapping(ControllerConstants.COUNTRY_BY_ID)
     @ResponseBody
-    public ResponseEntity<List<CountryItemResponse>> getAll() {
-        List<CountryItemResponse> all = countryService.getAll();
+    public ResponseEntity<CountryResponse> update(
+            @Parameter(description = "unique identifier to be searched", required = true)
+            @PathVariable(name = "id" )final Long id,
+            @Parameter(description = "country model")
+            @RequestBody @Valid CountryRequest request) {
+        // TODO: implement update
+        CountryResponse countryResponse = new CountryResponse(id, request,false);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(countryResponse);
+    }
+
+    @GetMapping("/enabled")
+    @ResponseBody
+    public ResponseEntity<List<CountryItemResponse>> getAll(
+            @RequestParam(required = false) String title) {
+        List<CountryItemResponse> all = countryService.getAll(title);
         return ResponseEntity.status(HttpStatus.OK).body(all);
     }
+
+
 
     @GetMapping(ControllerConstants.COUNTRY_BY_ID)
     @ResponseBody
@@ -50,5 +66,26 @@ public class CountryController {
         log.info("call get country by id: {}", id);
         CountryResponse country = countryService.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(country);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
+        try {
+            countryService.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/countries")
+    public ResponseEntity<HttpStatus> deleteAllTutorials() {
+        try {
+            countryService.deleteAll();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }

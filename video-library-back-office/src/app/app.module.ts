@@ -19,6 +19,9 @@ import { AccountProfileComponent } from './components/account-profile/account-pr
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UsersComponent } from './components/users/users.component';
 import { FilmsComponent } from './components/films/films.component';
+import { CountryListComponent } from './components/country/country-list/country-list.component';
+import { AddCountryComponent } from './components/country/add-country/add-country.component';
+import { CountryDetailsComponent } from './components/country/country-details/country-details.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -28,6 +31,7 @@ const routes: Routes = [
   {path: 'profile', component: AccountProfileComponent},
   {path: 'users', component: UsersComponent},
   {path: 'films', component: FilmsComponent},
+  {path: 'countries', component: CountryListComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
@@ -43,6 +47,9 @@ const routes: Routes = [
     SidebarComponent,
     UsersComponent,
     FilmsComponent,
+    CountryListComponent,
+    AddCountryComponent,
+    CountryDetailsComponent,
 
   ],
   imports: [

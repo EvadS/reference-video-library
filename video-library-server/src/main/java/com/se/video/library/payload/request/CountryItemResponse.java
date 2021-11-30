@@ -7,4 +7,5 @@ public class CountryItemResponse {
 
     private Long id;
     private String name;
+    private boolean enabled;
 }
