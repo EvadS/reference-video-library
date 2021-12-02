@@ -1,1 +1,53 @@
-<p>add-country works!</p>
+<main class="main" id="main">
+
+  <section class="section">
+    <div class="row">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Country Details</h5>
+
+          <div>
+            <div class="submit-form">
+              <div *ngIf="!submitted">
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input
+                    [(ngModel)]="country.name"
+                    [required]="true"
+                    class="form-control"
+                    id="title"
+                    name="name"
+                    required type="text"
+                  />
+                </div>
+
+
+                <div class="row mb-3">
+                  <div class="col-sm-10 offset-sm-2">
+                    <div class="form-check">
+                      <input class="form-check-input"
+                             id="gridCheck1"
+                             type="checkbox"
+                             name="enabled"
+                             checked ="{{country.enabled == true }}"
+                             value="{{country.enabled}}"
+                      >
+                      <label class="form-check-label" for="gridCheck1">
+                        {{ country.enabled ? "Enabled" : "Disabled" }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button (click)="saveTutorial()" class="btn btn-success">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>

@@ -1,7 +1,11 @@
 # Getting Started
 
-### Reference Documentation
+### Swagger
+```
+/custom/swagger-ui.html
+```
 
+### Reference Documentation
 
 | Methods	| Urls |	Actions |
 |---        |---   |  ---  |
@@ -11,6 +15,18 @@
 |GET	|/api/test/user	|access User’s content
 |GET	| /api/test/mod	|access Moderator’s content
 |GET	| /api/test/admin	|access Admin’s content
+
+
+### country api 
+
+| Methods	| Urls |	Actions |
+|---        |---   |  ---  |
+|POST	|/api/v1/country	 |create new Country|
+|GET	|/api/v1/country/list 	 |retrieve all Country|
+|GET	|/api/country/list?name=[keyword]|	find all Tutorials which title contains keyword|
+|GET	|/api/v1/country/:id|	retrieve a Country by :id|
+|PUT	|/api/v1/country/:id|	update a Country by :id|
+|DELETE	|/api/v1/country/:id|	delete a Country by :id|
 
 ### Technology
 * Java 8

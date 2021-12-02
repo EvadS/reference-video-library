@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CountryService} from "../../../services/country.service";
 import {ActivatedRoute, Router} from '@angular/router';
 import {Country} from "../../../models/Countryl";
@@ -11,7 +11,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class CountryDetailsComponent implements OnInit {
 
-  currentTutorial: Country = {
+  @Input() currentTutorial: Country = {
     name: '',
     enabled: false
   };
@@ -26,10 +26,8 @@ export class CountryDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.message = '';
 
-    // this.route.params.subscribe(params=>this.id=params['id'])
-    // this.getTutorial(this.route.snapshot.params.id);
 
-   console.log("get all by: " + this.activateRoute.snapshot.params['id']);
+    console.log("get all by: " + this.activateRoute.snapshot.params['id']);
 
     let id = this.activateRoute.snapshot.params['id'];
     if(id==null){

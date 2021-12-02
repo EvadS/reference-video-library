@@ -10,4 +10,8 @@ import java.util.List;
 public interface CountryRepository extends JpaRepository<Country, Long> {
 
     List<Country> findAllByName(String name);
+
+    List<Country> findByNameAndIdNot(String name, Long id);
+
+    List<Country> findByNameContaining(String name);
 }

@@ -24,6 +24,9 @@ public class Country extends UserDateAudit<String> {
     @Column(nullable = false, unique=true)
     private String name;
 
+    @Column(nullable = false, unique=true, columnDefinition = "boolean default true")
+    private boolean enabled = false;
+
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,

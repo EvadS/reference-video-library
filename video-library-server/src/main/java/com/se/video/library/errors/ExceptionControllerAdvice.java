@@ -1,6 +1,7 @@
 package com.se.video.library.errors;
 
 import com.se.video.library.errors.exception.AlreadyExistException;
+import com.se.video.library.errors.exception.DataBaseConstraintException;
 import com.se.video.library.errors.exception.ResourceNotFoundException;
 import com.se.video.library.errors.models.ApiValidationError;
 import com.se.video.library.errors.models.ErrorDetail;
@@ -79,6 +80,17 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 
         return buildErrorResponse(e, "Resource not found", e.getMessage(), HttpStatus.NOT_FOUND, request);
     }
+
+
+    @ExceptionHandler(DataBaseConstraintException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<?> handleResourceNotFoundException(DataBaseConstraintException e, WebRequest request) {
+
+        LOGGER.error("ConstraintViolationException. Reason: {}", e.getMessage()) ;
+
+        return buildErrorResponse(e, "Resource not found", e.getMessage(), HttpStatus.BAD_REQUEST, request);
+    }
+
 
 
     /***************************************************************

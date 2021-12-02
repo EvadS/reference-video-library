@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { Country} from "../models/Countryl";
 import {LogService} from "./log.service";
 
-const baseUrl = 'http://localhost:8090/country';
+
+const baseUrl = 'http://localhost:8090/api/v1/country';
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +39,9 @@ export class CountryService {
   deleteAll(): Observable<any> {
     return this.http.delete(baseUrl);
   }
-
+//api/v1/country/list?name=ua
   findByTitle(title: any): Observable<Country[]> {
-    return this.http.get<Country[]>(`${baseUrl}?title=${title}`);
+    console.log("here");
+    return this.http.get<Country[]>(`${baseUrl}/list?name=${title}`);
   }
 }

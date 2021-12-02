@@ -2,7 +2,6 @@ package com.se.video.library.config;
 
 import com.se.video.library.config.constant.ControllerConstants;
 import com.se.video.library.controllers.FilmController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerTypePredicate;
@@ -15,9 +14,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private final long MAX_AGE_SECS = 3600;
-
+    @Value("${file.upload-dir}")
+    String mediaRootLocation;
     @Value("${app.cors.allowedOrigins}")
     private String[] allowedOrigins;
+    @Value("${resource.cash.period}")
+    private int cachePeriod;
+    private int cashPeriod;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -27,21 +30,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .maxAge(MAX_AGE_SECS);
     }
 
-//    @Override
-//    public void configurePathMatch(PathMatchConfigurer configurer) {
-//        configurer.addPathPrefix(ControllerConstants.PATH_PREFIX, HandlerTypePredicate.forBasePackageClass(FilmController.class));
-//    }
-@Value("${resource.cash.period}")
-private int cachePeriod;
-
-    @Value("${file.upload-dir}")
-    String mediaRootLocation;
-
-
-    private int cashPeriod;
-
-
-
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        configurer.addPathPrefix(ControllerConstants.PATH_PREFIX, HandlerTypePredicate.forBasePackageClass(FilmController.class));
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

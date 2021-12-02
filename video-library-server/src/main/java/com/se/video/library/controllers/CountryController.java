@@ -36,28 +36,6 @@ public class CountryController {
         return ResponseEntity.status(HttpStatus.CREATED).body(countryResponse);
     }
 
-    @PutMapping(ControllerConstants.COUNTRY_BY_ID)
-    @ResponseBody
-    public ResponseEntity<CountryResponse> update(
-            @Parameter(description = "unique identifier to be searched", required = true)
-            @PathVariable(name = "id" )final Long id,
-            @Parameter(description = "country model")
-            @RequestBody @Valid CountryRequest request) {
-        // TODO: implement update
-        CountryResponse countryResponse = new CountryResponse(id, request,false);
-
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(countryResponse);
-    }
-
-    @GetMapping("/list")
-    @ResponseBody
-    public ResponseEntity<List<CountryItemResponse>> getAll(
-            @RequestParam(required = false) String title) {
-        List<CountryItemResponse> all = countryService.getAll(title);
-        return ResponseEntity.status(HttpStatus.OK).body(all);
-    }
-
-
 
     @GetMapping(ControllerConstants.COUNTRY_BY_ID)
     @ResponseBody
@@ -69,24 +47,35 @@ public class CountryController {
         return ResponseEntity.status(HttpStatus.OK).body(country);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
-        try {
-            countryService.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @GetMapping("/list")
+    @ResponseBody
+    public ResponseEntity<List<CountryResponse>> getAll(
+            @Parameter(description = "search bt name condition", required = false)
+            @RequestParam(required = false) String name) {
+        List<CountryResponse> all = countryService.getAll(name);
+        return ResponseEntity.status(HttpStatus.OK).body(all);
     }
 
-    @DeleteMapping("/countries")
-    public ResponseEntity<HttpStatus> deleteAllTutorials() {
-        try {
-            countryService.deleteAll();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PutMapping(ControllerConstants.COUNTRY_BY_ID)
+    @ResponseBody
+    public ResponseEntity<CountryResponse> update(
+            @Parameter(description = "unique identifier to be searched", required = true)
+            @PathVariable(name = "id" )final Long id,
+            @Parameter(description = "country model")
+            @RequestBody @Valid CountryRequest request) {
+        CountryResponse countryResponse =  countryService.update(id, request);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(countryResponse);
+    }
+
+
+    @DeleteMapping(ControllerConstants.COUNTRY_BY_ID)
+    public ResponseEntity<HttpStatus> delete(
+            @Parameter(description = "unique identifier to be searched", required = true)
+            @PathVariable("id") long id) {
+
+            countryService.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
 
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Country} from "../../../models/Countryl";
 import {CountryService} from "../../../services/country.service";
 
@@ -10,23 +10,24 @@ import {CountryService} from "../../../services/country.service";
 })
 export class CountryListComponent implements OnInit {
 
-  tutorials?: Country[];
-  currentTutorial: Country = {};
+  countries?: Country[];
+  currentCountry: Country = {};
   currentIndex = -1;
-  title = '';
+  data = '';
 
-  constructor(private countryService: CountryService) { }
-
-  ngOnInit(): void {
-    this.retrieveTutorials();
+  constructor(private countryService: CountryService) {
   }
 
+  ngOnInit(): void {
+    console.log("here==")
+    this.retrieveCountries();
+  }
 
-  retrieveTutorials(): void {
+  retrieveCountries(): void {
     this.countryService.getAll()
       .subscribe(
         data => {
-          this.tutorials = data;
+          this.countries = data;
           console.log(data);
         },
         error => {
@@ -35,17 +36,17 @@ export class CountryListComponent implements OnInit {
   }
 
   refreshList(): void {
-    this.retrieveTutorials();
-    this.currentTutorial = {};
+    this.retrieveCountries();
+    this.currentCountry = {};
     this.currentIndex = -1;
   }
 
-  setActiveTutorial(tutorial: Country, index: number): void {
-    this.currentTutorial = tutorial;
+  setActiveCountry(country: Country, index: number): void {
+    this.currentCountry = country;
     this.currentIndex = index;
   }
 
-  removeAllTutorials(): void {
+  removeAllCountries(): void {
     this.countryService.deleteAll()
       .subscribe(
         response => {
@@ -57,15 +58,27 @@ export class CountryListComponent implements OnInit {
         });
   }
 
-  searchTitle(): void {
-    this.currentTutorial = {};
+  searchByTitle(): void {
+    this.currentCountry = {};
     this.currentIndex = -1;
 
-    this.countryService.findByTitle(this.title)
+    this.countryService.findByTitle(this.data)
       .subscribe(
         data => {
-          this.tutorials = data;
+          this.countries = data;
           console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  delete(id: any) {
+    this.countryService.delete(id)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.refreshList();
         },
         error => {
           console.log(error);

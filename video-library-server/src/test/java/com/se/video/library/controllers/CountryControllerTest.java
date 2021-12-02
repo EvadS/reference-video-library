@@ -1,26 +1,18 @@
 package com.se.video.library.controllers;
 
 import com.se.video.library.dao.repository.CountryRepository;
+import com.se.video.library.dao.repository.FilmRepository;
 import com.se.video.library.services.CountryService;
 import com.se.video.library.services.impl.CountryServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.InjectMocks;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MvcResult;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @Import(CountryServiceImpl.class)
@@ -33,9 +25,12 @@ public class CountryControllerTest {
     @MockBean
     private CountryRepository countryRepository;
 
+    @MockBean
+    private  FilmRepository filmRepository;
+
     @BeforeEach
     public void init (){
-        countryService = new CountryServiceImpl(countryRepository);
+        countryService = new CountryServiceImpl(countryRepository, filmRepository);
     }
 
 

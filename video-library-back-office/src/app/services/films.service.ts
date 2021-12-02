@@ -6,7 +6,8 @@ import {LogService} from "./log.service";
 
 import {FilmItem} from "../models/Films";
 // TODO: BASE URL
-const baseUrl = 'http://localhost:8090/film';
+const baseUrl = 'http://localhost:8090/api/v1/film';
+
 
 const  httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -16,4 +16,8 @@ public class CountryRequest {
     @Schema(description = "Name of the country.",
             example = "Ukraine", required = true)
     private String name;
+
+    @NotNull(message = "Name cannot be null")
+        @Schema(description = "is country enabled.",required = true)
+    private Boolean enabled;
 }

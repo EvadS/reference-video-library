@@ -6,14 +6,14 @@
     <div class="col-md-8">
       <div class="input-group mb-3">
         <input
-          [(ngModel)]="title"
+          [(ngModel)]="data"
           class="form-control"
           placeholder="Search by title"
           type="text"
         />
         <div class="input-group-append">
           <button
-            (click)="searchTitle()"
+            (click)="searchByTitle()"
             class="btn btn-outline-secondary"
             type="button"
           >
@@ -21,6 +21,10 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="col-md-2">
+      <a routerLink="/countries/add" class="btn btn-outline-success">Add</a>
     </div>
   </div>
 
@@ -37,24 +41,30 @@
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Enabled</th>
+              <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
-            <tr (click)="setActiveTutorial(country,country.id)"
-                *ngFor="let country of tutorials"
-                [class.active]="country.id == currentIndex"
+            <tr
+              (click)="setActiveCountry(currentCountry,currentCountry.id)"
+              *ngFor="let currentCountry of countries"
+              [class.active]="currentCountry.id == currentIndex"
             >
-              <th scope="row">{{ country.id }}</th>
-              <th scope="row">{{ country.name}}</th>
-              <th scope="row">{{ country.enabled}}</th>
+              <th scope="row">{{ currentCountry.id }}</th>
+              <th scope="row">{{ currentCountry.name}}</th>
+              <th scope="row">{{ currentCountry.enabled}}</th>
+              <th>
+              <span
+                (click)="delete(currentCountry.id)"
+                class="badge bg-danger">
+                  Delete
+              </span>
+              </th>
+            </tr>
             </tbody>
           </table>
           <!-- End Default Table Example -->
         </div>
-
-        <button (click)="removeAllTutorials()" class="m-3 btn btn-sm btn-danger">
-          Remove All
-        </button>
       </div>
     </div>
 
@@ -63,28 +73,28 @@
         <div class="card-body">
           <h5 class="card-title">Countries Information</h5>
 
-          <div *ngIf="currentTutorial.id">
+          <div *ngIf="currentCountry.id">
             <div class="card-text">
               <div>
-                <label><strong>Title:</strong></label> {{ currentTutorial.name }}
+                <label><strong>Title:</strong></label> {{ currentCountry.name }}
               </div>
             </div>
 
             <div class="card-text">
               <div>
                 <label><strong>Status:</strong></label>
-                {{ currentTutorial.enabled ? "Published" : "Pending" }}
+                {{ currentCountry.enabled ? "Published" : "Pending" }}
               </div>
 
             </div>
             <div class="card-text">
-              <button class="btn btn-warning" routerLink="/countries/{{ currentTutorial.id }}">
+              <button class="btn btn-warning" routerLink="/countries/edit/{{ currentCountry.id }}">
                 Edit
               </button>
             </div>
           </div>
 
-          <div *ngIf="!currentTutorial">
+          <div *ngIf="!currentCountry">
             <br/>
             <p>Please click on a Tutorial...</p>
           </div>

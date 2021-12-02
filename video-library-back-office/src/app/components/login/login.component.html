@@ -38,7 +38,7 @@
                     maxlength="20"/>
 
                 </div>
-                <div div [hidden]="email.valid || email.untouched"
+                <div [hidden]="email.valid || email.untouched"
                      class="invalid-visible">
                   Please enter your email
                 </div>
@@ -50,14 +50,14 @@
                 <input #password="ngModel" [(ngModel)]="loginRequest.password"
                        class="form-control" id="yourPassword" name="password"
                        required type="password"/>
-                <div div [hidden]="password.valid || password.untouched"
+                <div [hidden]="password.valid || password.untouched"
                      class="invalid-visible">
                   Please enter your password.
                 </div>
               </div>
 
               <div *ngIf="myForm.submitted && isLoginFailed" class="col-12">
-                <div class="invalid-visible">
+                <div>
                   Login failed: {{ errorMessage }}
                 </div>
               </div>
