@@ -1,8 +1,10 @@
 package com.se.video.library.payload.response;
 
-import com.se.video.library.payload.request.GenreRequest;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Data
@@ -12,5 +14,9 @@ public class GenreResponse {
     @Schema(description = "unique identifier.", required = true)
     private long id;
 
-    private GenreRequest genreRequest;
+    @NotNull(message = "Name cannot be null")
+    @NotBlank(message = "Name cannot be Empty")
+    @Schema(description = "Name of the genre.",
+            example = "Comedy", required = true)
+    private String name;
 }

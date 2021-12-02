@@ -2,6 +2,7 @@ package com.se.video.library.dao.repository;
 
 import com.se.video.library.dao.models.Country;
 import com.se.video.library.dao.models.Film;
+import com.se.video.library.dao.models.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
@@ -16,5 +17,6 @@ public interface FilmRepository extends JpaRepository<Film, Long>, JpaSpecificat
 
 
     List<Film> findByCountriesContains(Country country);
+    List<Film> findByGenresContains(Genre genre);
 }
 

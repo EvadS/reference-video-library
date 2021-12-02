@@ -9,5 +9,11 @@ import java.util.List;
 public interface GenreService {
     GenreResponse create(GenreRequest genreRequest);
 
-    List<GenreItemResponse> getAll();
+    List<GenreResponse> getAll(String name);
+
+    GenreResponse getById(Long id);
+
+    GenreResponse update(Long id, GenreRequest request);
+
+    void delete(long id);
 }

@@ -47,7 +47,7 @@ public class CountryController {
         return ResponseEntity.status(HttpStatus.OK).body(country);
     }
 
-    @GetMapping("/list")
+    @GetMapping(ControllerConstants.GENRE_LIST)
     @ResponseBody
     public ResponseEntity<List<CountryResponse>> getAll(
             @Parameter(description = "search bt name condition", required = false)
@@ -67,7 +67,6 @@ public class CountryController {
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(countryResponse);
     }
-
 
     @DeleteMapping(ControllerConstants.COUNTRY_BY_ID)
     public ResponseEntity<HttpStatus> delete(

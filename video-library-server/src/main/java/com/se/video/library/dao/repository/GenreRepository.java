@@ -11,5 +11,9 @@ import java.util.List;
 public interface GenreRepository extends JpaRepository<Genre, Long> {
 
     List<Genre> findAllByName(String name);
+
+    List<Genre> findByNameAndIdNot(String name, Long id);
+
+    List<Genre> findByNameContaining(String name);
 }
 

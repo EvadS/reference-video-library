@@ -16,4 +16,8 @@ public class GenreRequest {
     @Schema(description = "Name of the genre.",
             example = "Comedy", required = true)
     private String name;
+
+    @NotNull(message = "enabled cannot be null")
+    @Schema(description = "is country enabled.",required = true)
+    private Boolean enabled;
 }
