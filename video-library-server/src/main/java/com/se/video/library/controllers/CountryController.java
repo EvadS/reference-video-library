@@ -23,10 +23,11 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Validated
-public class CountryController {
+public class CountryController implements CountryApi {
 
     private final CountryService countryService;
 
+    @Override
     @PostMapping
     @ResponseBody
     public ResponseEntity<CountryResponse> create(
@@ -37,16 +38,18 @@ public class CountryController {
     }
 
 
+    @Override
     @GetMapping(ControllerConstants.COUNTRY_BY_ID)
     @ResponseBody
     public ResponseEntity<CountryDetailsResponse> getById(
             @Parameter(description = "unique identifier to be searched", required = true)
-            @PathVariable(name = "id" )final Long id) {
+            @PathVariable(name = "id") final Long id) {
         log.info("call get country by id: {}", id);
         CountryDetailsResponse country = countryService.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(country);
     }
 
+    @Override
     @GetMapping(ControllerConstants.GENRE_LIST)
     @ResponseBody
     public ResponseEntity<List<CountryResponse>> getAll(
@@ -56,11 +59,12 @@ public class CountryController {
         return ResponseEntity.status(HttpStatus.OK).body(all);
     }
 
+    @Override
     @PutMapping(ControllerConstants.COUNTRY_BY_ID)
     @ResponseBody
     public ResponseEntity<CountryResponse> update(
             @Parameter(description = "unique identifier to be searched", required = true)
-            @PathVariable(name = "id" )final Long id,
+            @PathVariable(name = "id") final Long id,
             @Parameter(description = "country model")
             @RequestBody @Valid CountryRequest request) {
         CountryResponse countryResponse =  countryService.update(id, request);
@@ -68,6 +72,7 @@ public class CountryController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(countryResponse);
     }
 
+    @Override
     @DeleteMapping(ControllerConstants.COUNTRY_BY_ID)
     public ResponseEntity<HttpStatus> delete(
             @Parameter(description = "unique identifier to be searched", required = true)

@@ -1,10 +1,8 @@
 package com.se.video.library.controllers;
 
 import com.se.video.library.config.constant.ControllerConstants;
-import com.se.video.library.payload.request.CountryRequest;
-import com.se.video.library.payload.request.GenreItemResponse;
+import com.se.video.library.controllers.api.GenreApi;
 import com.se.video.library.payload.request.GenreRequest;
-import com.se.video.library.payload.response.CountryResponse;
 import com.se.video.library.payload.response.GenreResponse;
 import com.se.video.library.services.GenreService;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -24,10 +22,11 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Validated
-public class GenreController {
+public class GenreController implements GenreApi {
 
     private final GenreService genreService;
 
+    @Override
     @PostMapping
     @ResponseBody
     public ResponseEntity<GenreResponse> create(
@@ -38,16 +37,18 @@ public class GenreController {
     }
 
 
+    @Override
     @GetMapping(ControllerConstants.GENRE_BY_ID)
     @ResponseBody
     public ResponseEntity<GenreResponse> getById(
             @Parameter(description = "unique identifier to be searched", required = true)
-            @PathVariable(name = "id" )final Long id) {
+            @PathVariable(name = "id") final Long id) {
         log.info("call get genre by id: {}", id);
         GenreResponse genreResponse = genreService.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(genreResponse);
     }
 
+    @Override
     @GetMapping("/list")
     @ResponseBody
     public ResponseEntity<List<GenreResponse>> getAll(
@@ -58,11 +59,12 @@ public class GenreController {
     }
 
 
+    @Override
     @PutMapping(ControllerConstants.GENRE_BY_ID)
     @ResponseBody
     public ResponseEntity<GenreResponse> update(
             @Parameter(description = "unique identifier to be searched", required = true)
-            @PathVariable(name = "id" )final Long id,
+            @PathVariable(name = "id") final Long id,
             @Parameter(description = "genre model")
             @RequestBody @Valid GenreRequest request) {
         GenreResponse genreResponse =  genreService.update(id, request);
@@ -70,6 +72,7 @@ public class GenreController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(genreResponse);
     }
 
+    @Override
     @DeleteMapping(ControllerConstants.GENRE_BY_ID)
     public ResponseEntity<HttpStatus> delete(
             @Parameter(description = "unique identifier to be searched", required = true)

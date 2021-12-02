@@ -1,4 +1,4 @@
-package com.se.video.library.controllers;
+package com.se.video.library.constraint;
 
 public class GeneralConstants {
 
