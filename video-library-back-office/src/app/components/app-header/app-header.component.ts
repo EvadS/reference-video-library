@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import  {TokenStorageService} from "../../services/token-storage.service";
 
 @Component({
-  selector: 'app-app-header',
+  selector: 'app-header',
   templateUrl: './app-header.component.html',
   styleUrls: ['./app-header.component.css']
 })
