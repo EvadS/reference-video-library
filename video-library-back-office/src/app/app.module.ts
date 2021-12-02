@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from "@angular/forms";
+// import {FormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from "@angular/common/http";
 
@@ -23,6 +24,7 @@ import {CountryDetailsComponent} from './components/country/country-details/coun
 import {LibraryComponent} from './components/library/library.component';
 import {FilmListComponent} from './components/films/film-list/film-list.component';
 import {FilmDetailsComponent} from './components/films/film-details/film-details.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -57,12 +59,13 @@ const routes: Routes = [
     LibraryComponent,
     FilmListComponent,
     FilmDetailsComponent,
+    UserEditComponent,
 
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    FormsModule,
+    FormsModule,ReactiveFormsModule,
     HttpClientModule,
     NgbModule
   ],
